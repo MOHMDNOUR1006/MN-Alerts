@@ -22,7 +22,7 @@ import {
   AVATAR_FRAMES_MAP,
 } from '../data/alertsCatalog.js';
 
-import { SOUND_PRESETS_LIST, soundEngine } from '../services/soundEngine.js';
+import { SOUND_PRESETS_LIST } from '../services/soundEngine.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
