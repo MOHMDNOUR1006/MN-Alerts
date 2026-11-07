@@ -1,0 +1,6 @@
+{
+  "framework": "vite",
+  "rootDirectory": "mn-alert-lab-1/src",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
+}
