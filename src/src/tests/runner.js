@@ -5,6 +5,7 @@
  *
  * Usage:
  *   node src/tests/runner.js
+ *   node src/tests/runner.js --tier=0
  *   node src/tests/runner.js --tier=1
  *   node src/tests/runner.js --tier=2
  *   node src/tests/runner.js --tier=3
@@ -18,6 +19,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const TIERS = [
+  { id: 0, name: 'Tier 0: Milestone 0 Foundational Deliverables & Catalog Integrity', file: 'tier0_m0_foundational_deliverables.test.js' },
   { id: 1, name: 'Tier 1: Feature Coverage & Contracts', file: 'tier1_feature_coverage.test.js' },
   { id: 2, name: 'Tier 2: Boundary, Adversarial & Extreme Inputs', file: 'tier2_boundary_corner_cases.test.js' },
   { id: 3, name: 'Tier 3: Cross-Feature Interactions', file: 'tier3_cross_feature_interactions.test.js' },
@@ -32,14 +34,14 @@ console.log('===================================================================
 // Parse CLI flags
 const args = process.argv.slice(2);
 const tierArg = args.find((a) => a.startsWith('--tier='));
-const targetTier = tierArg ? parseInt(tierArg.split('=')[1], 10) : null;
+const targetTier = tierArg !== undefined ? parseInt(tierArg.split('=')[1], 10) : null;
 
-const tiersToRun = targetTier
+const tiersToRun = targetTier !== null
   ? TIERS.filter((t) => t.id === targetTier)
   : TIERS;
 
 if (tiersToRun.length === 0) {
-  console.error(`❌ Unknown tier specified: ${targetTier}. Available tiers: 1, 2, 3, 4.`);
+  console.error(`❌ Unknown tier specified: ${targetTier}. Available tiers: 0, 1, 2, 3, 4.`);
   process.exit(1);
 }
 

@@ -297,6 +297,14 @@ export const ALERT_PACKS = [
       'صوت نبض قلب مرعب يتبعه لمعان معدني وانفجار ستيريو حقيقي',
       'إطار صورة رمزية شفاف المفرغ (RGBA Frame) للمركز الأول',
     ],
+    descriptionEn:
+      'The flagship cinematic takeover alert: your stream lighting dims gradually while keeping the game clearly visible, a colossal shadow ascends, and piercing twin eyes ignite in pitch darkness, followed by a thunderous fireball explosion and shockwave revealing the supporter inside an alpha-masked royal frame!',
+    includesEn: [
+      '4 cinematic stages: Screen Dimming -> Twin Glowing Eyes in Darkness -> MP4 VFX Blast + Particles -> Supporter Reveal',
+      'Seamless transparent explosion video overlay (Screen Blend Overlay) keeping gameplay visible',
+      'Terrifying heartbeat sub-bass crescendo into metallic sheen and stereo cinematic explosion',
+      'Transparent background RGBA avatar frame for the #1 top supporter',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen (60 FPS)',
       engine: '4-Stage Choreography + MP4 VFX + 60fps Canvas Particles',
@@ -352,6 +360,14 @@ export const ALERT_PACKS = [
       'فيديو انفجار ناري شفاف (Screen VFX) لا يحجب شاشة اللعبة',
       'صوت صفير الصواريخ القادمة متبوعاً بـ 3 انفجارات مدوية حقيقية',
       'إطار التنين الناري المفرغ حول صورة الداعم',
+    ],
+    descriptionEn:
+      'A tactical barrage of flaming military rockets launches from screen corners with live smoke trails and fire physics (60fps Canvas rockets + MP4 fireball VFX), colliding at screen center into a massive fireball that reveals the donor\'s name and tip amount while preserving game visibility underneath!',
+    includesEn: [
+      'Live canvas rocket engine launching tracking missiles that detonate at screen center',
+      'Transparent screen-blend fireball explosion video that never occludes gameplay',
+      'Realistic incoming missile whistle crescendo followed by three seismic stereo detonations',
+      'Alpha-masked Molten Dragon fire frame surrounding the supporter\'s avatar',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen Transparent VFX',
@@ -409,6 +425,14 @@ export const ALERT_PACKS = [
       'صوت استلال السيف المعدني + صاعقة رعد وانفجار',
       'إطار الشيطان القرمزي المفرغ الخلفية (RGBA PNG)',
     ],
+    descriptionEn:
+      'Inspired by iconic dark anime sequences: ambient stream lighting dims, twin crimson eyes blaze in the shadows, and a razor-sharp katana blade slashes diagonally across the screen amidst a crimson lightning storm and crossed demonic blades!',
+    includesEn: [
+      'Twin crimson eyes ignited in darkness followed by a screen-splitting diagonal katana slash',
+      'Crimson Slash Storm 1080p MP4 overlay featuring electric embers and red lightning',
+      'High-fidelity metallic katana unsheath transient followed by thunderclap shockwave',
+      'Transparent background RGBA Demon Shogun crossed blades avatar frame',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen (60 FPS)',
       engine: 'Katana Vector Blade + MP4 Slash Storm + Blood Drip Shader',
@@ -464,6 +488,14 @@ export const ALERT_PACKS = [
       'فيديو انفجار السوبرنوفا الذهبية + لوحة الأسد الملكي 1080p',
       'صوت زئير أسد حقيقي ممزوج ببوق ملكي وانفجار',
       'وسام #1 TOP SUPPORTER المشتعل بالذهب',
+    ],
+    descriptionEn:
+      'Dedicated to the ultimate champion and #1 top subscriber or highest donor: a majestic golden lion emerges with glowing amber eyes in the darkness, releasing an earth-shattering roar that detonates a pure gold supernova and crowns the supporter inside an authentic royal golden frame!',
+    includesEn: [
+      'True RGBA background-removed Royal Golden Crown avatar frame for the #1 top supporter',
+      'Golden Supernova explosion video VFX paired with 1080p royal lion artwork',
+      'Authentic predatory lion roar blended with royal fanfare horn and sub-bass impact',
+      'Gilded animated \'#1 TOP SUPPORTER\' achievement badge with sparkling gold particles',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
@@ -521,6 +553,14 @@ export const ALERT_PACKS = [
       'حلقات صدمة نارية متمددة وشرارات بركانية',
       'إطار التنين البركاني المفرغ حول صورة الداعم',
     ],
+    descriptionEn:
+      'When a massive donation or massive raid arrives, an urgent tactical siren sounds briefly before a nuclear warhead strikes, detonating an expanding radial shockwave, violent camera shake, and deep subterranean nuclear bass rumble across your broadcast!',
+    includesEn: [
+      'Full-screen tactical nuclear detonation with thermal flash and 3D camera shake physics',
+      'Authentic nuclear blast audio featuring supersonic crack and seismic sub-bass rumble',
+      'Expanding concentric fire shockwave rings with volcanic embers and ash particles',
+      'Alpha-masked volcanic dragon frame encasing the benefactor\'s avatar',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Nuclear Shockwave Canvas + Fireball MP4 + Seismic Audio',
@@ -576,6 +616,14 @@ export const ALERT_PACKS = [
       'لوحة فنية 16:9 لسيد الفراغ مع عينين مشعتين في الظلام',
       'صوت انفجار الجاذبية الكونية (Void Vortex Boom MP3)',
       'إطار الفرعون الكوني الشفاف',
+    ],
+    descriptionEn:
+      'Inspired by the legendary Hollow Purple singularity technique: the stream plunges into darkness, twin cyan and violet eyes illuminate the void, and an authentic 1080p cosmic vortex swallows the screen before collapsing into an explosive ultraviolet lightning blast!',
+    includesEn: [
+      'High-definition 1080p Cosmic Void Vortex MP4 video overlay with luminous purple accretion disk',
+      'Cinematic 16:9 Void Master art plate featuring piercing dual-color eyes in darkness',
+      'Cosmic gravitational implosion audio transient (Void Vortex Boom MP3) with deep low-end',
+      'Alpha-masked cosmic pharaoh void avatar frame',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
@@ -634,6 +682,13 @@ export const ALERT_PACKS = [
       'إطار الجعران الفرعوني المجنح المفرغ الخلفية (RGBA PNG)',
       'عاصفة جزيئات الذهب والزمرد + صوت انفجار المعبد',
     ],
+    descriptionEn:
+      'A world-class Egyptian mythological masterpiece: broadcast lighting dims as the Dark Pharaoh\'s eyes blaze with burning emerald and gold through ancient ceremonial smoke, before the golden sarcophagus bursts open to reveal the supporter inside a winged scarab frame!',
+    includesEn: [
+      '1080p Dark Pharaoh Awakening artwork featuring glowing emerald eyes piercing ancient mist',
+      'Transparent RGBA winged Egyptian scarab pharaoh avatar frame',
+      'Swirling emerald and gold hieroglyphic particle storm with deep temple ruin detonation audio',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Pharaoh Boss Art + RGBA Scarab Frame + Golden Supernova MP4',
@@ -688,6 +743,13 @@ export const ALERT_PACKS = [
       'فيديو CGI 1080p حقيقي (Plasma Core Blast MP4)',
       'صوت شحن وتفجير البلازما السيبرانية (215KB Stereo MP3)',
       'تأثير Glitch RGB ثلاثي الأبعاد لاسم الداعم',
+    ],
+    descriptionEn:
+      'Utilizes authentic 1080p CGI footage of a hyper-spinning electromagnetic plasma core reaching critical overdrive and detonating EMP plasma discharges across your stream with real charging and discharge SFX.',
+    includesEn: [
+      'Authentic 1080p CGI video overlay (Plasma Core Blast MP4) with screen-blend transparency',
+      'Real cybernetic plasma charge-up and acoustic EMP detonation stereo audio (215KB MP3)',
+      '3D chromatic aberration RGB glitch displacement effect applied to the raider\'s username',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -748,6 +810,14 @@ export const ALERT_PACKS = [
       'فيديو جزيئات الذهب في خلفية البطاقة',
       'صوت زئير الأسد وبوق النصر الملكي',
     ],
+    descriptionEn:
+      'A regal alert card engineered specifically to celebrate the highest donor on your stream: places their avatar inside a genuine background-removed RGBA golden crown frame accompanied by the \'#1 TOP DONOR\' emblem and a cascade of glittering coins.',
+    includesEn: [
+      'Genuine background-removed transparent RGBA golden royal crown avatar frame',
+      'Animated \'#1 TOP DONOR\' royal crest floating above the avatar frame',
+      'Golden shimmer particle video background with floating bullion coins',
+      'Majestic lion roar harmonized with brass coronation horns and jackpot coin chimes',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'True RGBA Frame Overlay + Golden Supernova Video',
@@ -802,6 +872,13 @@ export const ALERT_PACKS = [
       'تأثير فوران الحمم البركانية وفيديو كرة النار',
       'صوت انفجار الصواريخ والحمم',
     ],
+    descriptionEn:
+      'Enshrines your #1 top subscriber or gift sub leader within an alpha-masked volcanic dragon frame, surging with realistic ascending flame plumes, molten lava bubbles, and intense heat shimmer around the card.',
+    includesEn: [
+      'Transparent RGBA volcanic dragon avatar frame (frame-dragon-fire.png)',
+      'Simulated magma boiling shader with transparent fireball burst video VFX',
+      'Volcanic eruption impact SFX layered with roaring fire transients',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Dragon RGBA Frame + Fireball MP4 + Magma Shader',
@@ -855,6 +932,13 @@ export const ALERT_PACKS = [
       'إطار سيوف الكاتانا القرمزية المفرغ (frame-crimson-demon.png)',
       'فيديو عاصفة البرق القرمزي + نص الدماء السائلة',
       'صوت ضربة الكاتانا والرعد',
+    ],
+    descriptionEn:
+      'An alpha-masked crimson katana and crossed demon blades frame framing the raid commander or top tapper, featuring liquid blood SVG drip typography and an electrifying blade storm.',
+    includesEn: [
+      'Transparent RGBA crimson demon crossed katanas avatar frame (frame-crimson-demon.png)',
+      'Crimson lightning storm video overlay with dripping liquid blood font filters',
+      'Steel katana draw slice transient paired with distant rolling thunder',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -914,6 +998,13 @@ export const ALERT_PACKS = [
       'فيديو عاصفة البرق القرمزي + إطار الكاتانا الشفاف',
       'مؤثر صوتي لضربة السيف والرعد',
     ],
+    descriptionEn:
+      'A pro-tier alert crafted with dynamic SVG displacement filters that cause fresh liquid blood to visibly drip from the new follower\'s username, backed by a crimson katana lightning storm and transparent demon frame.',
+    includesEn: [
+      'New follower alert featuring liquid organic blood drip SVG gooey displacement filter',
+      'Crimson lightning storm video backdrop paired with transparent demonic blade frame',
+      'Crisp metallic blade unsheathe sound effect culminating in a thunder strike',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Custom SVG Gooey Blood Shader + MP4 VFX',
@@ -967,6 +1058,13 @@ export const ALERT_PACKS = [
       'تنبيه اشتراك وهبة بنسيج الزجاج المتشظي',
       'إطار التاج الملكي الشفاف + شظايا كريستالية متطايرة',
       'مؤثر صوتي لتحطم الكريستال الحقيقي',
+    ],
+    descriptionEn:
+      'A distinctive design transforming the subscriber card and username into a pane of fracturing crystalline ice, scattering chromatic prismatic reflections and 3D glass shards upon entrance.',
+    includesEn: [
+      'Subscription and gift alert utilizing procedural fractured crystalline glass texture',
+      'Transparent royal crown frame surrounded by 60fps flying glass shards',
+      'Authentic high-frequency crystal shattering and glass resonance acoustic effect',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -1022,6 +1120,13 @@ export const ALERT_PACKS = [
       'إطار الزمرد الفرعوني الشفاف حول صورة الداعم',
       'مؤثر صوتي مائي نقي مع نغمة الكريستال',
     ],
+    descriptionEn:
+      'The supporter\'s name and donation amount surface atop a fluid oceanic water plane featuring concentric expanding wave ripples and luminous rising bubbles across the backdrop.',
+    includesEn: [
+      'Donation alert driven by realistic liquid water caustic and surface ripple shaders',
+      'Alpha-masked Emerald Pharaoh avatar frame encircling the contributor\'s avatar',
+      'Pristine aquatic splash and fluid ripple acoustics harmonized with crystal chimes',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'SVG Sine-Wave Morphing + Caustic Rings',
@@ -1075,6 +1180,13 @@ export const ALERT_PACKS = [
       'نسيج قماشي متقاطع مع إضاءة ذهبية دافئة',
       'إطار التاج الملكي الشفاف (frame-royal-crown.png)',
       'بوق ملكي وزئير أسد عند ظهور التنبيه',
+    ],
+    descriptionEn:
+      'Crafted specifically for creators demanding palatial opulence; the subscriber\'s name appears intricately embroidered in glowing gold thread over woven royal crimson velvet with the royal crown frame.',
+    includesEn: [
+      'Textured cross-stitched royal velvet fabric background with warm golden specular highlights',
+      'Transparent RGBA golden royal crown frame (frame-royal-crown.png)',
+      'Coronation brass fanfare horn combined with distant lion roar entrance audio',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -1131,6 +1243,13 @@ export const ALERT_PACKS = [
       'فيديو عاصفة البرق القرمزي + اهتزاز كاميرا (Screen Shake)',
       'إطار الشيطان القرمزي المفرغ الخلفية',
     ],
+    descriptionEn:
+      'A cinematic full-screen takeover commanding your broadcast when a large raid or major donation arrives: ambient light dims, twin blood-red eyes ignite, and crimson lightning arcs slash the screen with rolling thunder.',
+    includesEn: [
+      'Full 1080p screen takeover maintaining gameplay visibility via screen-blend compositing',
+      'Crimson lightning storm video overlay paired with reactive 3D screen shake physics',
+      'Alpha-masked Crimson Demon crossed swords avatar frame',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen (60 FPS)',
       engine: 'Full-Viewport Katana & Lightning + MP4 VFX',
@@ -1186,6 +1305,13 @@ export const ALERT_PACKS = [
       'فيديو جزيئات الفضاء + شظايا كريستالية متطايرة بـ 60 إطاراً في الثانية',
       'مؤثر تحطم زجاجي سينمائي حقيقي',
     ],
+    descriptionEn:
+      'When a super-donation or top-tier sub triggers, your broadcast glass shatters across the entire display, revealing the supporter\'s name within the golden crown amidst a multi-dimensional prismatic shockwave.',
+    includesEn: [
+      'Full-screen procedural SVG glass fracture grid spanning all 1920x1080 pixels',
+      'Cosmic particle vortex video overlay with 60fps flying 3D crystal debris',
+      'Cinematic multi-layered glass fracture acoustic impact with lingering harmonic decay',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Full-Viewport SVG Glass Fracture + Void MP4',
@@ -1240,6 +1366,13 @@ export const ALERT_PACKS = [
       'إطار الزمرد الشفاف حول صورة المتابع',
       'مؤثر صوتي لطاقة البلازما',
     ],
+    descriptionEn:
+      'A high-performance, lightweight free alert combining crisp cyan plasma pulses with the transparent emerald frame to give every beginner streamer an instant broadcast-grade OBS look.',
+    includesEn: [
+      'New follower alert featuring responsive cyan-teal plasma neon glow animations',
+      'Transparent RGBA emerald pharaoh frame surrounding the follower\'s profile photo',
+      'Snappy futuristic plasma blip sound effect engineered for high stream clarity',
+    ],
     techSpecs: {
       resolution: '1920×1080',
       engine: 'SVG + Canvas Sparks + Hardware CSS',
@@ -1293,6 +1426,13 @@ export const ALERT_PACKS = [
       'بطاقة تبرع ديناميكية مع فيديو شرارات الذهب',
       'إطار التاج الملكي المفرغ الخلفية',
       'صوت انفجار خزينة العملات الذهبية الحقيقي (coins-jackpot-drop.mp3)',
+    ],
+    descriptionEn:
+      'A free donation alert with the visual power of premium paid suites: features an authentic vault-busting coin explosion and falling gold tokens framed by the royal crown.',
+    includesEn: [
+      'Dynamic emerald donation card accented with shimmering gold spark video FX',
+      'Transparent background-removed royal golden crown avatar frame',
+      'Authentic gold coin jackpot vault detonation audio (coins-jackpot-drop.mp3)',
     ],
     techSpecs: {
       resolution: '1920×1080',
@@ -1350,6 +1490,13 @@ export const ALERT_PACKS = [
       'إطار الجعران الفرعوني المجنح الشفاف (frame-pharaoh-void.png)',
       'مؤثر صوتي ملكي مهيب',
     ],
+    descriptionEn:
+      'Unlocked as a prestigious loyalty milestone reward for viewers reaching 3+ months of subscription or Level 3 loyalty rank, crowned by the winged Egyptian scarab frame.',
+    includesEn: [
+      'Royal papyrus and pure gold ceremonial styling paired with Golden Supernova video VFX',
+      'Transparent RGBA winged scarab pharaoh frame (frame-pharaoh-void.png)',
+      'Solemn pharaonic coronation fanfare with reverberant ceremonial bronze gong',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Pharaoh Sacred Geometry + RGBA Frame',
@@ -1406,6 +1553,13 @@ export const ALERT_PACKS = [
       'إطار التنين البركاني الشفاف (frame-dragon-fire.png)',
       'صوت انفجار بركاني عميق',
     ],
+    descriptionEn:
+      'Molten volcanic fissures and erupting magma scorch the raid commander or top supporter\'s name, accompanied by the alpha-masked volcanic dragon frame and deep seismic magma rumblings.',
+    includesEn: [
+      'Molten magma SVG displacement filter combined with transparent fireball video VFX',
+      'Alpha-masked volcanic dragon avatar frame (frame-dragon-fire.png)',
+      'Deep seismic volcanic eruption blast sound effect with low-end rumble',
+    ],
     techSpecs: {
       resolution: '1920×1080',
       engine: 'SVG Magma Shader + Fireball MP4 + Dragon Frame',
@@ -1458,6 +1612,12 @@ export const ALERT_PACKS = [
     includesAr: [
       'تأثير Glitch RGB ثلاثي الطبقات على اسم الداعم',
       'فيديو نواة البلازما 1080p + صوت تفجير الطاقة',
+    ],
+    descriptionEn:
+      'A dystopian cyberpunk alert engineered for competitive shooters and esports broadcasts, featuring three-tier RGB color separation and an overdriven plasma core video loop.',
+    includesEn: [
+      'Triple-layer RGB chromatic glitch split effect animating the supporter\'s handle',
+      '1080p plasma core reactor overdrive video VFX paired with electro-burst audio',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -1514,6 +1674,13 @@ export const ALERT_PACKS = [
       'فيديو عاصفة الشرر القرمزي + إطار السيوف الشفاف',
       'صوت زئير مفترس وانفجار ستيريو',
     ],
+    descriptionEn:
+      'One of the most intense hype alerts: outer screen edges darken into a blood moon vignette as glowing red alpha eyes flash, followed by beastly energy claws tearing through the display alongside a predatory roar.',
+    includesEn: [
+      'Cinematic twin red eyes igniting in darkness followed by 3D screen tear claw slashes',
+      'Crimson spark particle storm video overlay paired with transparent crossed swords frame',
+      'Feral predator howl harmonized with heavy stereo sub-bass impact',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Twin Red Eyes + Crimson Slash MP4 + Canvas Claws',
@@ -1568,6 +1735,13 @@ export const ALERT_PACKS = [
       'قصف صواريخ حي فوق شاشة اللعبة دون حجب الرؤية',
       'صوت صفير الصواريخ والانفجار الثلاثي الحقيقي',
       'إطار التنين الناري المفرغ حول صورة الداعم',
+    ],
+    descriptionEn:
+      'Engineered specifically for battle royale and shooter streamers (Warzone, PUBG, Apex Legends): tactical cruise missiles streak across the screen and detonate, dropping the supporter\'s care package amidst red flare smoke.',
+    includesEn: [
+      'Live canvas tactical rocket barrage exploding across screen space without blocking gameplay',
+      'Realistic artillery incoming whistle leading into a heavy three-stage blast SFX',
+      'Alpha-masked fire dragon frame surrounding the donor\'s profile avatar',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen Transparent',
@@ -1624,6 +1798,13 @@ export const ALERT_PACKS = [
       'صوت زئير الأسد الملكي الحقيقي (lion-roar-impact.mp3)',
       'إطار التاج الملكي الشفاف للمرتبة الأولى #1',
     ],
+    descriptionEn:
+      'The premier alert built for legendary Lion, Whale, and Universe gifts across TikTok Live and Kick: a flaming golden lion strides in with luminous eyes, letting out an authentic roar that detonates a gold particle storm across the stream!',
+    includesEn: [
+      'Blazing golden lion master artwork combined with 1080p Golden Supernova video VFX',
+      'Authentic high-fidelity lion roar impact audio asset (lion-roar-impact.mp3)',
+      'Transparent RGBA golden royal crown frame honoring the top benefactor',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Lion Boss Art + Golden Supernova MP4 + Roar Audio',
@@ -1678,6 +1859,13 @@ export const ALERT_PACKS = [
       'فيديو كرة النار المتفجرة + إطار التنين الشفاف',
       'صوت انفجار حماسي سريع',
     ],
+    descriptionEn:
+      'Inspired by top-tier viral tap alerts like TikAlert but elevated with superior physics: fireballs and explosive sparks burst around the top tapper\'s card encased in the volcanic dragon frame.',
+    includesEn: [
+      'Dedicated high-velocity alert for rapid likes, taps, shares, and combo streaks',
+      'Transparent fireball explosion video VFX paired with alpha-masked dragon frame',
+      'Punchy, rapid-fire explosive acoustic transient designed for high-frequency triggering',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Fireball Shockwave MP4 + Canvas Sparks',
@@ -1731,6 +1919,13 @@ export const ALERT_PACKS = [
       'فيديو السوبرنوفا الذهبية + جزيئات ذهب حية',
       'إطار التاج الملكي الشفاف (frame-royal-crown.png)',
       'صوت انفجار خزينة العملات الذهبية',
+    ],
+    descriptionEn:
+      'A sparkling coins-and-gifts alert blending golden supernova starbursts, the transparent royal crown avatar frame, and cascading physical coin drop audio.',
+    includesEn: [
+      'Golden Supernova video VFX enhanced with 60fps live canvas gold particle physics',
+      'Transparent RGBA royal golden crown frame (frame-royal-crown.png)',
+      'High-energy jackpot vault detonation and metallic coins clatter audio',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -1787,6 +1982,13 @@ export const ALERT_PACKS = [
       'توهج نورين في الظلام + إطار الزمرد الشفاف',
       'صوت صحوة الظلال والانفجار',
     ],
+    descriptionEn:
+      'Elevates simple follower alerts into AAA anime-tier spectacles: cinematic rolling fog creeps across the screen as twin piercing blue eyes ignite in the dark before unveiling the new follower.',
+    includesEn: [
+      'Atmospheric cinematic rolling fog video overlay (dark-fog-omen.mp4)',
+      'Twin glowing shadow eyes igniting in darkness with alpha-masked emerald frame',
+      'Mysterious ambient shadow pulse sound effect building into a crisp impact',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Dark Fog MP4 + Shadow Eyes Choreography',
@@ -1841,6 +2043,13 @@ export const ALERT_PACKS = [
       'صواعق برق ذهبية وسماوية مرسومة بـ 60 إطاراً في الثانية',
       'فيديو السوبرنوفا الذهبية + إطار التاج الملكي الشفاف',
       'صوت استلال السيف وصاعقة الرعد الحقيقية',
+    ],
+    descriptionEn:
+      'Inspired by the lightning-fast Thunder Breathing First Form: lighting dips, twin amber eyes flash in the dark, and a dazzling golden-cyan lightning streak cleaves the broadcast in a fraction of a second with deafening thunder!',
+    includesEn: [
+      '60fps high-velocity golden and cyan lightning bolt shaders streaking across the screen',
+      'Golden Supernova video VFX background accompanied by transparent royal crown frame',
+      'Instantaneous katana blade draw transient coupled with sonic thunderclap detonation',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
@@ -1897,6 +2106,13 @@ export const ALERT_PACKS = [
       'فيديو عاصفة الشرر القرمزي + إطار السيوف الشفاف',
       'صوت نبض القلب والانفجار المظلم',
     ],
+    descriptionEn:
+      'One of the most sought-after dark anime aesthetics: your stream dims beneath a deep crimson vignette while keeping the gameplay crisp, then a solitary scarlet ghoul eye ignites and unleashes a red lightning tempest!',
+    includesEn: [
+      'Dynamic screen dimming stage paired with awakening single scarlet ghoul eye',
+      'Crimson spark storm MP4 overlay coupled with transparent crossed swords frame',
+      'Tense organic heartbeat sub-bass crescendo culminating in an occult shadow blast',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Shadow Eyes Choreography + Crimson Storm MP4',
@@ -1951,6 +2167,13 @@ export const ALERT_PACKS = [
       'إطار التاج الملكي الذهبي الشفاف (frame-royal-crown.png)',
       'صوت انفجار الجاذبية الكونية',
     ],
+    descriptionEn:
+      'Combines sovereign imperial purple with regal gold leaf accents, supported by a 1080p swirling cosmic particle galaxy video and the alpha-masked golden royal crown frame.',
+    includesEn: [
+      '1080p ultra-violet cosmic space vortex and particle accretion video loop',
+      'Transparent RGBA golden royal crown frame (frame-royal-crown.png)',
+      'Resonant cosmic gravitational boom audio effect with smooth low-frequency decay',
+    ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
       engine: 'Void Vortex MP4 + Royal Crown RGBA Frame',
@@ -2004,6 +2227,13 @@ export const ALERT_PACKS = [
       'مجاني 100% لجميع المستخدمين لتجربة قوة MN Alerts',
       'فيديو انفجار الصواريخ + محرك صواريخ الكانفاس',
       'صوت صفير الصواريخ والانفجار الحقيقي',
+    ],
+    descriptionEn:
+      'Say goodbye to bland free alerts: this zero-cost welcome alert launches real tracking fire rockets that explode to reveal the newcomer inside an alpha-masked volcanic dragon frame!',
+    includesEn: [
+      '100% free tier alert showcasing the full animation power of the MN Alerts engine',
+      'Transparent missile burst video overlay combined with 60fps canvas rocket physics',
+      'Authentic rocket launch whistle transitioning into a sharp stereo detonation',
     ],
     techSpecs: {
       resolution: '1920×1080 (60 FPS)',
@@ -2060,6 +2290,13 @@ export const ALERT_PACKS = [
       'إطار التاج الملكي الشفاف للمركز الأول #1',
       'صوت انفجار مدوٍ مع رنين العملات',
     ],
+    descriptionEn:
+      'Tailored specifically for mass community gift subscriptions (Sub Bombs): a golden rocket drops from the ceiling, triggering a brilliant cloud of golden embers and crowning the gifter with the #1 royal frame.',
+    includesEn: [
+      'Full-screen golden fireworks detonation featuring descending gold missiles and embers',
+      'Transparent RGBA royal golden crown frame dedicated to the #1 gift benefactor',
+      'Colossal celebration explosion SFX accompanied by melodic ringing gold coins',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
       engine: 'Nuclear Drop Choreography + Golden Supernova MP4',
@@ -2114,6 +2351,13 @@ export const ALERT_PACKS = [
       'لوحة صحوة الفرعون + فيديو الضباب السينمائي',
       'إطار الجعران الفرعوني الشفاف (frame-pharaoh-void.png)',
       'صوت صحوة الظلال والانفجار العميق',
+    ],
+    descriptionEn:
+      'An epic mythological raid spectacle: solemn temple mist creeps in, glowing emerald jackal eyes ignite in the void, and the screen erupts in an ancient storm of gold and emerald scarabs to greet the raiding army.',
+    includesEn: [
+      '1080p Pharaonic Underworld artwork combined with atmospheric rolling temple fog video',
+      'Transparent RGBA winged Egyptian scarab frame (frame-pharaoh-void.png)',
+      'Shadow Awakening sub-bass rumble resolving into a reverberant ancient temple impact',
     ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen',
@@ -2171,6 +2415,12 @@ export const ALERT_PACKS = [
       'شاشة كاملة 1920×1080 مع عداد تنازلي يعمل تلقائياً',
       'خلفية فيديو متحركة + شريط سفلي لعرض أحدث متابع وأعلى داعم #1',
     ],
+    descriptionEn:
+      'A 1920x1080 full-screen stream intro scene featuring a synchronized live digital countdown timer, ambient animated video background, and an integrated lower-third ticker for top supporters.',
+    includesEn: [
+      'Native 1920x1080 full-screen scene with an automated live digital countdown clock',
+      'Looping ambient video backdrop with dedicated lower-third ticker for latest follower & #1 donor',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full Scene',
       engine: 'Live Countdown Timer + MP4 Ambient Backdrop',
@@ -2222,6 +2472,12 @@ export const ALERT_PACKS = [
     includesAr: [
       'خلفية فيديو السوبرنوفا الذهبية + منطقة مخصصة للدردشة',
       'عرض مستمر لأعلى داعم وآخر مشترك',
+    ],
+    descriptionEn:
+      'A broadcast-grade Be Right Back intermission scene designed to maintain viewer retention, featuring a plush crimson and gold particle backdrop with live stream event tickers.',
+    includesEn: [
+      'Golden Supernova video VFX loop with integrated stream chat display placeholder',
+      'Continuous real-time rotation displaying top donor, latest subscriber, and recent events',
     ],
     techSpecs: {
       resolution: '1920×1080 Full Scene',
@@ -2275,6 +2531,12 @@ export const ALERT_PACKS = [
       'لوحة شرف تلقائية لأبرز داعمي البث',
       'فيديو الفضاء الكوني 1080p + روابط التواصل',
     ],
+    descriptionEn:
+      'Conclude your broadcast with cinematic Hollywood-style rolling credits that showcase your stream\'s Hall of Fame (top contributors, subs, and followers) against a 1080p cosmic galaxy vortex.',
+    includesEn: [
+      'Automated rolling stream credits roll highlighting session MVP donors and subscribers',
+      '1080p cosmic deep-space vortex video background with creator social handle overlays',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full Scene',
       engine: 'Void Vortex MP4 + Credits Roll',
@@ -2327,6 +2589,12 @@ export const ALERT_PACKS = [
       'لوحة سيد الظلال 1080p + فيديو الضباب المتحرك',
       'عداد تنازلي حي + شريط الداعمين',
     ],
+    descriptionEn:
+      'An ominous, cinematic arena intro scene featuring the Shadow Monarch with piercing glowing eyes through rolling volumetric mist, paired with an automated countdown timer.',
+    includesEn: [
+      '1080p Shadow Monarch artwork paired with looping atmospheric fog video VFX',
+      'Integrated live countdown clock and rotating champion supporter spotlight banner',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full Scene',
       engine: 'Shadow Boss Art + Dark Fog MP4',
@@ -2377,6 +2645,13 @@ export const ALERT_PACKS = [
       'منصة المركز الأول (#1 Top Donor & #1 Top Subscriber) بالإطارات الملكية الشفافة (RGBA PNG)',
       'شريط هدف التبرعات والمتابعين الحي (Animated Goal Bar)',
       'صندوق محادثة البث الشفاف (Stream Chat Box Overlay)',
+    ],
+    descriptionEn:
+      'The complete all-in-one broadcast HUD widget suite: showcases the #1 Top Supporter podium with transparent RGBA royal frames, an animated real-time goal progress bar, and a clean transparent chat box overlay.',
+    includesEn: [
+      '#1 Top Donor and Top Subscriber honor podium framed with alpha-masked royal RGBA PNGs',
+      'Animated dynamic goal progress bar supporting follower, sub, and tip milestones',
+      'Clean transparent stream chat box overlay with custom font and badge formatting',
     ],
     techSpecs: {
       resolution: 'متجاوب بالكامل (Modular HUD)',
@@ -2429,6 +2704,13 @@ export const ALERT_PACKS = [
       'إطار التنين الناري الشفاف (frame-dragon-fire.png) للمشترك الأول #1',
       'إطار الكاتانا القرمزي الشفاف (frame-crimson-demon.png) لبطل التكبيس #1',
     ],
+    descriptionEn:
+      'Engineered to drive community competition and increase contributions: docks cleanly in the corner of your screen, displaying the #1 Top Donor in the royal golden crown frame, and the #1 Top Subscriber in the molten dragon fire frame!',
+    includesEn: [
+      'Transparent Royal Golden Crown frame (frame-royal-crown.png) crowning the #1 Top Donor',
+      'Transparent Molten Dragon Fire frame (frame-dragon-fire.png) honoring the #1 Top Subscriber',
+      'Transparent Crimson Katana frame (frame-crimson-demon.png) for the #1 Top Tapper / Hype Champion',
+    ],
     techSpecs: {
       resolution: '1920×1080 Modular Overlay',
       engine: 'True RGBA Transparent PNG Frames + Live Leaderboard',
@@ -2478,6 +2760,12 @@ export const ALERT_PACKS = [
     includesAr: [
       'شريط تقدم ناري متحرك (Dragon Fire Goal Bar)',
       'بطاقة الداعم الأول بإطار التنين الشفاف',
+    ],
+    descriptionEn:
+      'A free modular stream widget pairing an animated flaming tip/coin goal bar with an integrated recent supporter card framed by the transparent volcanic dragon border.',
+    includesEn: [
+      'Animated flaming progress bar (Dragon Fire Goal Bar) with real-time percentage fill',
+      'Recent donor spotlight card encased in the alpha-masked volcanic dragon frame',
     ],
     techSpecs: {
       resolution: 'Modular HUD',
@@ -2534,6 +2822,13 @@ export const ALERT_PACKS = [
       'صوت صفير الصواريخ والانفجار الثلاثي الحقيقي',
       'يبقي شاشة البث واللعبة مرئية تحت التأثيرات بفضل المزج الضوئي (Screen Blend)',
     ],
+    descriptionEn:
+      'The visual pinnacle of the MN Alerts engine: unites every cinematic element — lighting dimming, twin golden eyes flashing in the dark, a live tactical rocket barrage detonating across the screen, and the supporter crowned in the transparent royal crown frame for the #1 champion!',
+    includesEn: [
+      'Master composition: twin glowing eyes in darkness + exploding rockets + golden lion artwork + #1 royal crown frame',
+      'Authentic incoming missile whistle leading into a colossal three-stage detonation',
+      'Maintains full underlying gameplay visibility through advanced screen-blend optical compositing',
+    ],
     techSpecs: {
       resolution: '1920×1080 Full-Screen (60 FPS)',
       engine: 'Full Multi-Stage Choreography + Canvas Rockets + MP4 VFX + RGBA Frame',
@@ -2543,13 +2838,23 @@ export const ALERT_PACKS = [
   },
 ];
 
-export const ALERT_CATEGORIES = CATEGORIES.map((c) => ({
-  id: c.id,
-  name: c.labelAr,
-  nameEn: c.labelEn || c.id,
-  icon: c.icon,
-  count: c.count || 0,
-}));
+export const ALERT_CATEGORIES = CATEGORIES.map((c) => {
+  const dynamicCount =
+    c.id === 'all'
+      ? ALERT_PACKS.length
+      : ALERT_PACKS.filter((p) => p.category === c.id).length;
+
+  return {
+    ...c,
+    id: c.id,
+    label: c.labelAr,
+    labelAr: c.labelAr,
+    labelEn: c.labelEn || c.id,
+    name: c.labelAr,
+    nameEn: c.labelEn || c.id,
+    count: dynamicCount,
+  };
+});
 
 export const ALERTS_CATALOG = ALERT_PACKS.map((p) => {
   const normalizedTx = TEXTURE_ENGINES[p.textureEffect] ? p.textureEffect : 'shadow-eyes';
@@ -2568,14 +2873,39 @@ export const ALERTS_CATALOG = ALERT_PACKS.map((p) => {
     designerEn: p.designerEn || 'Mohmad Nour Studio',
     badgeLabel: p.categoryLabelAr,
     badgeLabelEn: p.categoryLabelEn || p.category,
+    category: p.category,
+    categoryLabel: p.categoryLabelAr,
+
+    // Tier & Subscription Aliases
+    tier: p.accessType,
+    plan: p.accessType,
     accessTier: p.accessType,
+    accessType: p.accessType,
+
+    // Visual Texture & VFX Engine Aliases
+    texture: normalizedTx,
+    textureEffect: p.textureEffect,
     textureEngine: normalizedTx,
+
+    // Avatar Frame Aliases
+    frameId: frameObj.id,
+    avatarFrame: frameObj.id,
     avatarFrameId: frameObj.id,
+    framePrefixedId: `frame-${frameObj.id}`,
     avatarFrameUrl: frameObj.imageUrl,
     avatarFrameNameAr: frameObj.nameAr,
     avatarFrameNameEn: frameObj.nameEn,
     avatarFrameBadge: frameObj.badgeAr,
     avatarFrameBadgeEn: frameObj.badgeEn,
+
+    // Audio SFX & Sound Engine Aliases
+    soundPreset: p.soundPreset,
+    sound: p.soundPreset,
+    soundId: p.soundPreset,
+    audioPreset: p.soundPreset,
+
+    // Choreography Aliases
+    choreography: choreoObj.id,
     choreographyId: choreoObj.id,
     choreographyLabelAr: choreoObj.labelAr,
     choreographyLabelEn: choreoObj.labelEn,
