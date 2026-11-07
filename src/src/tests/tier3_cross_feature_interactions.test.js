@@ -27,7 +27,6 @@ describe('Tier 3: Cross-Feature Interactions', () => {
   describe('3.1 Critical Alert Preemption Mechanism', () => {
     test(
       'critical event (priority 0) immediately preempts currently active low-priority alert',
-      { skip: 'Scheduled for Milestone 1: Critical Alert Preemption Engine (Feature F06)' },
       async () => {
         const queue = await getPriorityQueueImplementation();
         let activeTriggered = null;
@@ -120,7 +119,6 @@ describe('Tier 3: Cross-Feature Interactions', () => {
   describe('3.5 Interactive Manual Queue Controls (Skip, Pause, Clear)', () => {
     test(
       'skip, pause, resume, and clear operate deterministically during active queue execution',
-      { skip: 'Scheduled for Milestone 1: Core Alert Engine Manual Queue Controls (Feature F06)' },
       async () => {
         const queue = await getPriorityQueueImplementation();
         queue.pause();

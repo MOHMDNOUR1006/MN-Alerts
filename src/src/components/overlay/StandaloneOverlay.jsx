@@ -61,7 +61,7 @@ export default function StandaloneOverlay() {
       soundPreset: event.customOverrides?.soundPreset || targetPack.soundPreset,
       avatarFrame: event.sender?.frameId || event.customOverrides?.avatarFrame || targetPack.avatarFrameId,
       choreography: event.customOverrides?.choreography || targetPack.choreographyId,
-      ...(event.customOverrides || {}),
+      ...event.customOverrides,
     };
 
     setLiveAlert({
@@ -73,11 +73,11 @@ export default function StandaloneOverlay() {
   }, [packParam]);
 
   // Handle critical interruption preemption
-  const handleAlertPreempt = useCallback((data) => {
+  const handleAlertPreempt = useCallback(() => {
     // Instantly halt audio engine to eliminate sound overlap
     try {
       soundEngine.stopAll();
-    } catch (_) {}
+    } catch {}
 
     // Clear active alert immediately so the preempting alert renders with 0ms delay
     setLiveAlert(null);

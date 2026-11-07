@@ -26,7 +26,7 @@ if (typeof process !== 'undefined' && process.versions && process.versions.node)
     if (req) {
       _nodeCrypto = req('crypto');
     }
-  } catch (_) {
+  } catch {
     _nodeCrypto = null;
   }
 }
@@ -202,7 +202,7 @@ function timingSafeEqual(a, b) {
       if (bufA.length === bufB.length) {
         return _nodeCrypto.timingSafeEqual(bufA, bufB);
       }
-    } catch (_) {}
+    } catch {}
   }
 
   // Constant-time comparison loop

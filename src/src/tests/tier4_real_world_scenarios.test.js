@@ -38,7 +38,6 @@ describe('Tier 4: Real-World Broadcast Simulation Scenarios', () => {
 
     test(
       'verifies OBS browser source tokenized URL handshake and scene routing',
-      { skip: 'Scheduled for Milestone 1: Standalone /overlay Route & tokenService.js (Feature F08)' },
       async () => {
         const tokenService = await getTokenServiceImplementation();
         const secret = 'obs_prod_stream_key_99';

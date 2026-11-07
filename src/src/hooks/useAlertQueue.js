@@ -25,7 +25,7 @@ export function useAlertQueue(options = {}) {
       setActiveAlert(null);
       setQueueSize(queue.size());
     };
-    const handlePreempt = (data) => {
+    const handlePreempt = () => {
       // Immediate preemption: set active to preemptor or null
       setQueueSize(queue.size());
     };

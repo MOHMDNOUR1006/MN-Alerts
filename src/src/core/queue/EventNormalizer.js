@@ -86,7 +86,7 @@ export function normalizeStreamEvent(raw = {}) {
     message: typeof messageRaw === 'string' ? sanitizeMessage(messageRaw) : undefined,
     viewers: typeof raw.payload?.viewers === 'number' ? Math.max(0, raw.payload.viewers) : (typeof raw.viewers === 'number' ? Math.max(0, raw.viewers) : 0),
     months: typeof raw.payload?.months === 'number' ? Math.max(1, raw.payload.months) : (typeof raw.months === 'number' ? Math.max(1, raw.months) : 1),
-    ...(raw.payload || {}),
+    ...raw.payload,
   };
 
   if (payload.amount !== undefined) payload.amount = sanitizeAmount(payload.amount);
