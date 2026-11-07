@@ -37,7 +37,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
   describe('1.1 Alert Queue Priority Scheduling', () => {
     test(
       'enforces strict priority order (0=Critical > 1=Raid > 2=Donation > 3=Sub > 4=Follow)',
-      { skip: 'Scheduled for Milestone 1: Priority Alert Queue (Feature F03)' },
       async () => {
         const queue = await getPriorityQueueImplementation();
         const contractCheck = validateAlertQueueContract(queue);
@@ -70,7 +69,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
 
     test(
       'preserves FIFO ordering for events with identical priority',
-      { skip: 'Scheduled for Milestone 1: Priority Alert Queue (Feature F03)' },
       async () => {
         const queue = await getPriorityQueueImplementation();
         queue.pause();
@@ -96,7 +94,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
   describe('1.2 Sliding Window Deduplication & Expiration', () => {
     test(
       'rejects duplicate event UUID within sliding window',
-      { skip: 'Scheduled for Milestone 1: Event Deduplication & Expiration (Feature F04)' },
       async () => {
         const queue = await getPriorityQueueImplementation({ dedupWindowMs: 5000 });
         queue.pause();
@@ -109,7 +106,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
 
     test(
       'rejects duplicate identical payload within sliding window',
-      { skip: 'Scheduled for Milestone 1: Event Deduplication & Expiration (Feature F04)' },
       async () => {
         const queue = await getPriorityQueueImplementation({ dedupWindowMs: 5000 });
         queue.pause();
@@ -134,7 +130,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
 
     test(
       'automatically drops stale/expired events on enqueue and dequeue',
-      { skip: 'Scheduled for Milestone 1: Event Deduplication & Expiration (Feature F04)' },
       async () => {
         const queue = await getPriorityQueueImplementation();
         queue.pause();
@@ -279,7 +274,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
   describe('1.6 OBS URL Tokenization & Security', () => {
     test(
       'generates and cryptographically verifies HMAC tokens',
-      { skip: 'Scheduled for Milestone 1: Standalone tokenService.js (Feature F09)' },
       async () => {
         const tokenService = await getTokenServiceImplementation();
         const sceneId = 'scene_main_1080p';
@@ -295,7 +289,6 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
 
     test(
       'rejects expired tokens and malformed strings',
-      { skip: 'Scheduled for Milestone 1: Standalone tokenService.js (Feature F09)' },
       async () => {
         const tokenService = await getTokenServiceImplementation();
         const secret = 'test_secret_key_abc_123';

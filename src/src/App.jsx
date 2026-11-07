@@ -31,6 +31,8 @@ import AlertOverlay, {
   AlertStageRenderer,
   TransparentFramedAvatar,
 } from './components/AlertOverlay';
+import { useAlertQueue } from './hooks/useAlertQueue';
+import { normalizeStreamEvent } from './core/queue/EventNormalizer';
 import './App.css';
 
 // Sidebar Category shortcuts matching the user's mockup + full-screen & widgets
@@ -110,6 +112,38 @@ export default function App() {
   const [liveTriggeredAlert, setLiveTriggeredAlert] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
 
+  // Live Priority Alert Queue & Preemption Engine (Milestone 1)
+  const {
+    activeAlert: queueActiveAlert,
+    queueSize,
+    isPaused,
+    enqueue: queueEnqueue,
+    skip: queueSkip,
+    clear: queueClear,
+    pause: queuePause,
+    resume: queueResume,
+    completeActive,
+  } = useAlertQueue({ maxCapacity: 100, dedupWindowMs: 5000 });
+
+  // Sync active alert from priority queue to live overlay renderer
+  useEffect(() => {
+    if (queueActiveAlert) {
+      const targetPack =
+        queueActiveAlert.pack ||
+        ALERTS_CATALOG.find((p) => p.id === queueActiveAlert.packId) ||
+        ALERTS_CATALOG[0];
+      const customData = queueActiveAlert.customOverrides || queueActiveAlert.customData || {};
+      setLiveTriggeredAlert({
+        pack: targetPack,
+        customData,
+        ts: Date.now(),
+      });
+      broadcastObsAlert(targetPack, customData);
+    } else {
+      setLiveTriggeredAlert(null);
+    }
+  }, [queueActiveAlert]);
+
   // -------------------------------------------------------------------------
   // 3. EFFECTS: AUTH SUBSCRIPTION, LOCALSTORAGE SYNC, OBS BROADCAST LISTENER
   // -------------------------------------------------------------------------
@@ -180,13 +214,41 @@ export default function App() {
     // Expose window.MNAlerts global API for Streamlabs / OBS browser scripts
     window.MNAlerts = {
       trigger: (packIdOrData, customData = {}) => {
-        const pack =
-          typeof packIdOrData === 'string'
-            ? ALERTS_CATALOG.find((p) => p.id === packIdOrData) || ALERTS_CATALOG[0]
-            : ALERTS_CATALOG[0];
-        const overrides = typeof packIdOrData === 'object' ? packIdOrData : customData;
-        setLiveTriggeredAlert({ pack, customData: overrides, ts: Date.now() });
+        let pack = ALERTS_CATALOG[0];
+        let overrides = {};
+        let priority = 2;
+
+        if (typeof packIdOrData === 'string') {
+          pack = ALERTS_CATALOG.find((p) => p.id === packIdOrData) || ALERTS_CATALOG[0];
+          overrides = customData;
+          if (customData.priority !== undefined) priority = customData.priority;
+        } else if (typeof packIdOrData === 'object' && packIdOrData !== null) {
+          pack = packIdOrData.pack || (packIdOrData.packId ? ALERTS_CATALOG.find((p) => p.id === packIdOrData.packId) : null) || ALERTS_CATALOG[0];
+          overrides = packIdOrData.customOverrides || packIdOrData;
+          if (packIdOrData.priority !== undefined) priority = packIdOrData.priority;
+        }
+
+        const streamEvent = normalizeStreamEvent({
+          id: `manual_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`,
+          type: pack.category || 'donation',
+          priority,
+          sender: { name: overrides.username || pack.defaultSupporter },
+          payload: {
+            amount: overrides.amount ? parseFloat(overrides.amount) : undefined,
+            message: overrides.message,
+          },
+          customOverrides: overrides,
+          pack,
+        });
+
+        queueEnqueue(streamEvent);
       },
+      skip: () => queueSkip(),
+      clear: () => queueClear(),
+      pause: () => queuePause(),
+      resume: () => queueResume(),
+      setVolume: (v) => soundEngine.setVolume(v),
+      setSound: (preset, url) => soundEngine.setCustomSound(preset, url),
     };
 
     return () => unsubBroadcast();
@@ -234,12 +296,146 @@ export default function App() {
       avatarFrame: overrides.avatarFrame || pack.avatarFrameId || 'royal-crown',
       choreography: overrides.choreography || pack.choreographyId || 'shadow-eyes-blast',
     };
-    setLiveTriggeredAlert({
+    const streamEvent = normalizeStreamEvent({
+      id: `studio_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
+      type: pack.category || 'donation',
+      priority: overrides.priority !== undefined ? overrides.priority : 2,
+      sender: { name: mergedOverrides.username },
+      payload: {
+        amount: mergedOverrides.amount ? parseFloat(mergedOverrides.amount) : undefined,
+        message: mergedOverrides.message,
+      },
+      customOverrides: mergedOverrides,
       pack,
-      customData: mergedOverrides,
-      ts: Date.now(),
     });
-    broadcastObsAlert(pack, mergedOverrides);
+    queueEnqueue(streamEvent);
+  };
+
+  const fireSimulatedEvent = (priority) => {
+    let evt;
+    if (priority === 0) {
+      const p = ALERTS_CATALOG.find((x) => x.id === 'shadow-monarch-twin-eyes') || ALERTS_CATALOG[0];
+      evt = normalizeStreamEvent({
+        id: `sim_p0_${Date.now()}`,
+        type: 'donation',
+        priority: 0,
+        platform: 'test',
+        tier: 'ultra',
+        sender: { name: '🚨 تنبيه طوارئ البث (P0)' },
+        payload: { amount: 10000, currency: 'EGP', message: 'قطع فوري لأي تنبيه نشط — تنبيه طوارئ قاطع!' },
+        customOverrides: {
+          username: '🚨 تنبيه طوارئ البث (P0)',
+          amount: '10,000 EGP',
+          subtext: 'انقطاع طارئ برمجياً',
+          message: 'قطع فوري لأي تنبيه نشط — تنبيه طوارئ قاطع!',
+        },
+        pack: p,
+      });
+      showToast('🚨 تم إطلاق تنبيه قاطع ذو أولوية 0 (قطع فوري)');
+    } else if (priority === 1) {
+      const p = ALERTS_CATALOG.find((x) => x.id === 'missile-fire-barrage-strike') || ALERTS_CATALOG[1];
+      evt = normalizeStreamEvent({
+        id: `sim_p1_${Date.now()}`,
+        type: 'raid',
+        priority: 1,
+        platform: 'twitch',
+        tier: 'pro',
+        sender: { name: 'قناة نور الألعاب (P1)' },
+        payload: { viewers: 850, message: 'غزو القناة بـ 850 محارب!' },
+        customOverrides: {
+          username: 'قناة نور الألعاب (P1)',
+          amount: '850 مشاهد',
+          subtext: 'غزو تكبيس ضخم',
+          message: 'غزو القناة بـ 850 محارب!',
+        },
+        pack: p,
+      });
+      showToast('⚔️ تم إدراج غزو ذو أولوية 1 في الطابور');
+    } else if (priority === 2) {
+      const p = ALERTS_CATALOG.find((x) => x.id === 'royal-crown-sovereignty') || ALERTS_CATALOG[2];
+      evt = normalizeStreamEvent({
+        id: `sim_p2_${Date.now()}`,
+        type: 'donation',
+        priority: 2,
+        platform: 'kick',
+        tier: 'plus',
+        sender: { name: 'أحمد سلطان (P2)' },
+        payload: { amount: 500, currency: 'USD', message: 'أفضل بث مباشر ومحتوى سينمائي!' },
+        customOverrides: {
+          username: 'أحمد سلطان (P2)',
+          amount: '$500 USD',
+          subtext: 'دعم المركز الأول',
+          message: 'أفضل بث مباشر ومحتوى سينمائي!',
+        },
+        pack: p,
+      });
+      showToast('💰 تم إدراج دعم ذو أولوية 2 في الطابور');
+    } else if (priority === 3) {
+      const p = ALERTS_CATALOG.find((x) => x.id === 'cyber-matrix-rain') || ALERTS_CATALOG[3];
+      evt = normalizeStreamEvent({
+        id: `sim_p3_${Date.now()}`,
+        type: 'subscribe',
+        priority: 3,
+        platform: 'youtube',
+        tier: 'plus',
+        sender: { name: 'سارة خالد (P3)' },
+        payload: { months: 6, tierName: 'عضوية النخبة' },
+        customOverrides: {
+          username: 'سارة خالد (P3)',
+          amount: '6 أشهر',
+          subtext: 'اشتراك جديد بالبث',
+          message: 'سعيد بالانضمام لعضوية النخبة!',
+        },
+        pack: p,
+      });
+      showToast('⭐ تم إدراج اشتراك ذو أولوية 3 في الطابور');
+    } else {
+      const p = ALERTS_CATALOG.find((x) => x.id === 'neon-retro-synth') || ALERTS_CATALOG[4];
+      evt = normalizeStreamEvent({
+        id: `sim_p4_${Date.now()}`,
+        type: 'follow',
+        priority: 4,
+        platform: 'twitch',
+        tier: 'free',
+        sender: { name: 'متابع جديد (P4)' },
+        payload: { message: 'أهلاً بك في البث!' },
+        customOverrides: {
+          username: 'متابع جديد (P4)',
+          amount: 'متابعة جديدة',
+          subtext: 'متابع جديد انضم للبث',
+        },
+        pack: p,
+      });
+      showToast('👤 تم إدراج متابعة ذات أولوية 4 في الطابور');
+    }
+    queueEnqueue(evt);
+  };
+
+  const fireStormTest = () => {
+    showToast('⚡ إطلاق عاصفة 10 تنبيهات متتالية لاختبار ترتيب الأولويات والفرز الفوري');
+    for (let i = 0; i < 9; i++) {
+      const p = ALERTS_CATALOG[i % ALERTS_CATALOG.length];
+      const priority = i % 2 === 0 ? 4 : 3;
+      queueEnqueue(
+        normalizeStreamEvent({
+          id: `storm_${Date.now()}_${i}`,
+          type: priority === 4 ? 'follow' : 'subscribe',
+          priority,
+          sender: { name: `عاصفة #${i + 1} (P${priority})` },
+          payload: { amount: (i + 1) * 10, message: `تنبيه عاصفة تجريبية #${i + 1}` },
+          customOverrides: {
+            username: `عاصفة #${i + 1} (P${priority})`,
+            amount: `${(i + 1) * 10} EGP`,
+            subtext: `عاصفة الأولويات`,
+          },
+          pack: p,
+        })
+      );
+    }
+    // End with a P0 Critical Interruption that preempts!
+    setTimeout(() => {
+      fireSimulatedEvent(0);
+    }, 400);
   };
 
   const toggleFavorite = (e, packId) => {
@@ -362,7 +558,10 @@ export default function App() {
       <AlertOverlay
         activeAlert={liveTriggeredAlert}
         isObsWidget={false}
-        onComplete={() => setLiveTriggeredAlert(null)}
+        onComplete={() => {
+          setLiveTriggeredAlert(null);
+          completeActive();
+        }}
       />
 
       {/* Toast Notification Pill */}
@@ -537,6 +736,100 @@ export default function App() {
             MAIN CONTENT AREA (Views 1..4)
             ================================================================= */}
         <main className="main">
+          {/* =================================================================
+              INTERACTIVE TEST EVENT SIMULATOR & QUEUE CONTROLS (MILESTONE 1)
+              ================================================================= */}
+          <div className="mn-queue-simulator-bar">
+            <div className="simulator-info">
+              <span className="simulator-tag">محاكي التنبيهات والأولويات:</span>
+              <span className={`simulator-badge ${isPaused ? 'paused' : ''}`}>
+                <span>{isPaused ? '⏸️ متوقف' : '▶️ نشط'}</span>
+                <span>•</span>
+                <span>طابور الانتظار: {queueSize}</span>
+              </span>
+            </div>
+            <div className="simulator-actions">
+              <button
+                type="button"
+                className="sim-btn sim-btn-p0"
+                onClick={() => fireSimulatedEvent(0)}
+                title="قطع فوري لأي تنبيه نشط"
+              >
+                🚨 P0 طوارئ (قطع فوري)
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-p1"
+                onClick={() => fireSimulatedEvent(1)}
+              >
+                ⚔️ P1 غزو
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-p2"
+                onClick={() => fireSimulatedEvent(2)}
+              >
+                💰 P2 هبة
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-p3"
+                onClick={() => fireSimulatedEvent(3)}
+              >
+                ⭐ P3 اشتراك
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-p4"
+                onClick={() => fireSimulatedEvent(4)}
+              >
+                👤 P4 متابع
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-ctrl"
+                onClick={() => {
+                  queueSkip();
+                  showToast('⏭️ تم تخطي الإشعار النشط');
+                }}
+              >
+                ⏭️ تخطي
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-ctrl"
+                onClick={() => {
+                  if (isPaused) {
+                    queueResume();
+                    showToast('▶️ تم استئناف الطابور');
+                  } else {
+                    queuePause();
+                    showToast('⏸️ تم إيقاف الطابور مؤقتاً');
+                  }
+                }}
+              >
+                {isPaused ? '▶️ استئناف' : '⏸️ إيقاف'}
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-ctrl"
+                onClick={() => {
+                  queueClear();
+                  showToast('🗑️ تم مسح طابور التنبيهات');
+                }}
+              >
+                🗑️ مسح
+              </button>
+              <button
+                type="button"
+                className="sim-btn sim-btn-ctrl"
+                onClick={fireStormTest}
+                style={{ color: '#FBBF24', borderColor: 'rgba(251, 191, 36, 0.4)' }}
+              >
+                ⚡ عاصفة 10x
+              </button>
+            </div>
+          </div>
           {/* ---------------------------------------------------------------
               VIEW 1: EXPLORE MARKETPLACE (استكشاف الإشعارات)
               --------------------------------------------------------------- */}

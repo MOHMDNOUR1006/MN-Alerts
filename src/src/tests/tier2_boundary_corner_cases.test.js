@@ -12,6 +12,7 @@ import {
   getTokenServiceImplementation,
   initialsAvatar,
 } from './helpers/testHarness.js';
+import { sanitizeAmount } from '../core/queue/EventNormalizer.js';
 
 describe('Tier 2: Boundary & Corner Cases', () => {
 
@@ -47,21 +48,23 @@ describe('Tier 2: Boundary & Corner Cases', () => {
   // Real implementation scheduled for src/core/queue/EventNormalizer.js in M1.
   // =========================================================================
   describe('2.2 Amount Sanitization & Currency Boundaries', () => {
-    test(
-      'sanitizes zero, negative, and invalid numeric donation amounts',
-      { skip: 'Scheduled for Milestone 1: Event Normalization & Input Sanitization (Feature F04 / F42)' },
-      async () => {
-        // Forward contract: will import { sanitizeAmount } from '../core/queue/EventNormalizer.js'
-      }
-    );
+    test('sanitizes zero, negative, and invalid numeric donation amounts', () => {
+      assert.equal(sanitizeAmount(0), 0);
+      assert.equal(sanitizeAmount(-50), 0, 'Negative amount must clamp to 0');
+      assert.equal(sanitizeAmount(-0.001), 0);
+      assert.equal(sanitizeAmount(NaN), 0, 'NaN must sanitize to 0');
+      assert.equal(sanitizeAmount(Infinity), 0, 'Infinity must sanitize to 0');
+      assert.equal(sanitizeAmount(-Infinity), 0);
+      assert.equal(sanitizeAmount('invalid_string'), 0);
+      assert.equal(sanitizeAmount(null), 0);
+      assert.equal(sanitizeAmount(undefined), 0);
+    });
 
-    test(
-      'correctly preserves valid floating point donation amounts',
-      { skip: 'Scheduled for Milestone 1: Event Normalization & Input Sanitization (Feature F04 / F42)' },
-      async () => {
-        // Forward contract: will import { sanitizeAmount } from '../core/queue/EventNormalizer.js'
-      }
-    );
+    test('correctly preserves valid floating point donation amounts', () => {
+      assert.equal(sanitizeAmount(4.99), 4.99);
+      assert.equal(sanitizeAmount('250.50'), 250.50);
+      assert.equal(sanitizeAmount(100000), 100000);
+    });
   });
 
   // =========================================================================
@@ -115,7 +118,6 @@ describe('Tier 2: Boundary & Corner Cases', () => {
   describe('2.5 Rapid 100-Event Queue Storm & Overflow Protection', () => {
     test(
       'survives rapid storm of 100 events within 50ms without crashing or dropping critical alerts',
-      { skip: 'Scheduled for Milestone 1: Priority Alert Queue Overflow Protection (Feature F05)' },
       async () => {
         const queue = await getPriorityQueueImplementation({ maxCapacity: 50, dedupWindowMs: 1000 });
         queue.pause();
@@ -154,7 +156,6 @@ describe('Tier 2: Boundary & Corner Cases', () => {
   describe('2.6 Tampered Token Security Verification', () => {
     test(
       'strictly rejects tampered sceneId, tampered signature bytes, and altered exp',
-      { skip: 'Scheduled for Milestone 1: OBS URL HMAC Token Security (Feature F09)' },
       async () => {
         const tokenService = await getTokenServiceImplementation();
         const secret = 'prod_secret_salt_9988';

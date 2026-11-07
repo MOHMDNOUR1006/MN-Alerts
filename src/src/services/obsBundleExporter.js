@@ -6,6 +6,7 @@
 // ==========================================================================
 
 import { AVATAR_FRAMES_MAP } from '../data/alertsCatalog';
+import { generateToken } from './tokenService';
 
 const CHANNEL_NAME = 'mn_alerts_live_channel';
 
@@ -78,9 +79,13 @@ export function listenObsBroadcast(onAlertReceived) {
  */
 export function getObsBrowserSourceUrl(packId = 'all', customOverrides = {}) {
   const origin = typeof window !== 'undefined' ? window.location.origin : 'https://mn-alert.vercel.app';
+  const sceneId = customOverrides.sceneId || customOverrides.scene || 'scene_default';
+  const token = generateToken(sceneId, customOverrides.secret);
   const params = new URLSearchParams();
+  params.set('token', token);
+  params.set('scene', sceneId);
   params.set('obs', '1');
-  params.set('pack', packId);
+  if (packId && packId !== 'all') params.set('pack', packId);
   if (customOverrides.username) params.set('username', customOverrides.username);
   if (customOverrides.amount) params.set('amount', customOverrides.amount);
   if (customOverrides.subtext) params.set('subtext', customOverrides.subtext);
@@ -88,7 +93,7 @@ export function getObsBrowserSourceUrl(packId = 'all', customOverrides = {}) {
   if (customOverrides.soundPreset) params.set('sound', customOverrides.soundPreset);
   if (customOverrides.avatarFrame) params.set('frame', customOverrides.avatarFrame);
   if (customOverrides.choreography) params.set('choreo', customOverrides.choreography);
-  return `${origin}/?${params.toString()}`;
+  return `${origin}/overlay?${params.toString()}`;
 }
 
 /**

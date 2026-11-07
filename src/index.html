@@ -5,9 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mnalerts — منصة إشعارات البث المباشر والمشاهد الاحترافية (OBS & Streamlabs)</title>
     <meta name="description" content="منصة mnalerts لإشعارات البث المباشر الاحترافية بـ HTML/CSS/SVG — نصوص دم متقطر، زجاج محطم، ماء متموج، قماش ملكي، وإشعارات ملء الشاشة ضمن منظومة MOHMMAD NOUR." />
+
+    <!-- Instant OBS CEF Transparency Enforcement (Prevents initial black/white flash) -->
+    <script>
+      if (window.location.search.includes('obs=1') || window.location.pathname.startsWith('/overlay')) {
+        document.documentElement.classList.add('obs-cef-mode');
+      }
+    </script>
+    <style>
+      html.obs-cef-mode, html.obs-cef-mode body, html.obs-cef-mode #root {
+        background: transparent !important;
+        background-color: transparent !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: hidden !important;
+      }
+    </style>
+
+    <!-- Google Fonts Preconnect & Preloaded Typography (Arabic & Latin Streaming Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Cairo:wght@700;800;900&family=Exo+2:ital,wght@0,600;0,800;0,900;1,800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><circle cx='32' cy='32' r='20' fill='%232DD4BF'/></svg>" />
   </head>
   <body>

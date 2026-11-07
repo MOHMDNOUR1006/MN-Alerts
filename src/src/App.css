@@ -1583,3 +1583,114 @@ h1, h2, h3, h4, .brand-name {
   color: #fde68a;
   pointer-events: none;
 }
+
+/* ==========================================================================
+   Interactive Alert Queue & Test Event Simulator Bar (Milestone 1)
+   ========================================================================== */
+.mn-queue-simulator-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 12px 18px;
+  margin-bottom: 20px;
+  background: rgba(18, 14, 22, 0.85);
+  border: 1px solid rgba(45, 212, 191, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+}
+
+.simulator-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.simulator-tag {
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #2DD4BF;
+  letter-spacing: 0.5px;
+}
+
+.simulator-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(45, 212, 191, 0.12);
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  font-size: 12px;
+  font-weight: 700;
+  color: #E6FBF7;
+}
+
+.simulator-badge.paused {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #FCA5A5;
+}
+
+.simulator-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sim-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.sim-btn-p0 {
+  background: linear-gradient(135deg, #EF4444, #991B1B);
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.4);
+}
+.sim-btn-p0:hover { transform: translateY(-1px); box-shadow: 0 0 18px rgba(239, 68, 68, 0.6); }
+
+.sim-btn-p1 {
+  background: linear-gradient(135deg, #F59E0B, #B45309);
+  color: #FFFFFF;
+}
+.sim-btn-p1:hover { transform: translateY(-1px); }
+
+.sim-btn-p2 {
+  background: linear-gradient(135deg, #10B981, #047857);
+  color: #FFFFFF;
+}
+.sim-btn-p2:hover { transform: translateY(-1px); }
+
+.sim-btn-p3 {
+  background: linear-gradient(135deg, #3B82F6, #1D4ED8);
+  color: #FFFFFF;
+}
+.sim-btn-p3:hover { transform: translateY(-1px); }
+
+.sim-btn-p4 {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #E2E8F0;
+}
+.sim-btn-p4:hover { background: rgba(255, 255, 255, 0.18); }
+
+.sim-btn-ctrl {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #CBD5E1;
+}
+.sim-btn-ctrl:hover { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; }
