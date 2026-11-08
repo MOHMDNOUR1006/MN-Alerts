@@ -84,20 +84,26 @@ describe('Tier 3: Cross-Feature Interactions', () => {
   });
 
   // =========================================================================
-  // 3.3 Concurrent Audio Limiting & Ducking (Milestone 2 Forward Contract)
-  // Note: In-file compressorSpec object literal & simulateLimiter removed to ensure test integrity.
-  // Real implementation scheduled for Web Audio DynamicsCompressorNode in soundEngine.js in M2.
+  // 3.3 Master Audio Compressor & Dynamic Limiting (Milestone 2 Real Verification)
   // =========================================================================
   describe('3.3 Master Audio Compressor & Dynamic Limiting', () => {
-    test(
-      'master audio dynamics limiter specifications prevent 0 dBFS digital clipping',
-      { skip: 'Scheduled for Milestone 2: Audio Engineering & DynamicsCompressorNode DSP (Feature F10)' },
-      async () => {
-        // Forward contract: will initialize master DynamicsCompressorNode in soundEngine.js
-        // and verify threshold <= -6.0dB, ratio >= 8.0, and attack <= 10ms on actual AudioNode.
-        assert.ok(typeof soundEngine.initMasterCompressor === 'function');
-      }
-    );
+    test('master audio dynamics limiter specifications prevent 0 dBFS digital clipping', async () => {
+      assert.ok(typeof soundEngine.initMasterCompressor === 'function', 'initMasterCompressor must be a function');
+      const compressor = soundEngine.initMasterCompressor();
+      assert.ok(compressor, 'Master compressor must be initialized and returned');
+      assert.ok(compressor.threshold, 'Compressor must have threshold AudioParam');
+      assert.ok(compressor.ratio, 'Compressor must have ratio AudioParam');
+      assert.ok(compressor.knee, 'Compressor must have knee AudioParam');
+      assert.ok(compressor.attack, 'Compressor must have attack AudioParam');
+      assert.ok(compressor.release, 'Compressor must have release AudioParam');
+
+      // Verify exact limiter parameters:
+      assert.equal(compressor.threshold.value, -6, 'Threshold must be -6 dB');
+      assert.equal(compressor.ratio.value, 12, 'Compression ratio must be 12:1');
+      assert.equal(compressor.knee.value, 12, 'Knee must be 12 dB');
+      assert.equal(compressor.attack.value, 0.003, 'Attack time must be 0.003s (3ms)');
+      assert.equal(compressor.release.value, 0.25, 'Release time must be 0.25s (250ms)');
+    });
   });
 
   // =========================================================================

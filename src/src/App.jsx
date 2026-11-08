@@ -277,7 +277,7 @@ export default function App() {
       amount: pack.defaultAmount || '500 EGP',
       subtext: pack.defaultSubtext || pack.headline,
       message: pack.defaultMessage || '',
-      soundPreset: pack.soundPreset || 'shadow_eyes',
+      soundPreset: pack.soundPreset || 'shadow-eyes',
       avatarFrame: pack.avatarFrameId || 'royal-crown',
       choreography: pack.choreographyId || 'shadow-eyes-blast',
     });
@@ -292,7 +292,7 @@ export default function App() {
       amount: overrides.amount || pack.defaultAmount || '500 EGP',
       subtext: overrides.subtext || pack.defaultSubtext || pack.headline,
       message: overrides.message !== undefined && overrides.message !== '' ? overrides.message : pack.defaultMessage,
-      soundPreset: overrides.soundPreset || pack.soundPreset || 'shadow_eyes',
+      soundPreset: overrides.soundPreset || pack.soundPreset || 'shadow-eyes',
       avatarFrame: overrides.avatarFrame || pack.avatarFrameId || 'royal-crown',
       choreography: overrides.choreography || pack.choreographyId || 'shadow-eyes-blast',
     };
@@ -1204,7 +1204,7 @@ export default function App() {
                           className="btn btn-ghost"
                           onClick={() =>
                             soundEngine.playPreset(
-                              customOverrides.soundPreset || selectedPack.soundPreset || 'shadow_eyes'
+                              customOverrides.soundPreset || selectedPack.soundPreset || 'shadow-eyes'
                             )
                           }
                         >

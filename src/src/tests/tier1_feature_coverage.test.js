@@ -14,6 +14,7 @@ import {
   validateStreamEventContract,
   validateAlertQueueContract,
   validateSubscriptionProfileContract,
+  validateSoundEngineContract,
 } from './helpers/contractDefinitions.js';
 
 import {
@@ -23,6 +24,13 @@ import {
 } from './helpers/testHarness.js';
 
 import { AVATAR_FRAMES, AVATAR_FRAMES_MAP } from '../data/alertsCatalog.js';
+import {
+  ALERT_PACKS,
+  ALERTS_CATALOG,
+  getAlertPacksByTier,
+  getAlertPacksByTierLevel,
+  getAvatarFrameById,
+} from '../data/alertPacks.js';
 import { SOUND_PRESETS_LIST, soundEngine } from '../services/soundEngine.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -190,6 +198,25 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
       // Restore default
       soundEngine.setVolume(0.88);
     });
+
+    test('soundEngine satisfies SoundEngineInterface contract (PROJECT.md §2)', () => {
+      const res = validateSoundEngineContract(soundEngine);
+      assert.ok(res.valid, `SoundEngine missing contract methods: ${res.missing?.join(', ')}`);
+    });
+
+    test('soundEngine tolerates underscore and hyphen preset identifiers interchangeably', () => {
+      assert.doesNotThrow(() => {
+        soundEngine.play('shadow_eyes');
+        soundEngine.play('shadow-eyes');
+      });
+    });
+
+    test('soundEngine stopAll executes clean ramp-down without error', () => {
+      soundEngine.play('explosion');
+      assert.doesNotThrow(() => {
+        soundEngine.stopAll();
+      });
+    });
   });
 
   // =========================================================================
@@ -265,6 +292,32 @@ describe('Tier 1: Feature Coverage & Contract Verification', () => {
         const localImgPath = path.join(PUBLIC_DIR, frame.imageUrl.replace(/^\//, ''));
         assert.ok(fs.existsSync(localImgPath), `Avatar frame image must exist at ${localImgPath}`);
       }
+    });
+
+    test('validates avatar frame resolution with and without frame- prefix', () => {
+      const frames = ['royal-crown', 'dragon-fire', 'crimson-demon', 'pharaoh-void'];
+      for (const id of frames) {
+        const raw = getAvatarFrameById(id);
+        const prefixed = getAvatarFrameById(`frame-${id}`);
+        assert.ok(raw && raw.id === id, `Raw frame resolution failed for ${id}`);
+        assert.ok(prefixed && prefixed.id === id, `Prefixed frame resolution failed for frame-${id}`);
+      }
+    });
+
+    test('confirms catalog items expose tierLevel (1-4), audio, and vfx properties', () => {
+      for (const item of ALERTS_CATALOG) {
+        assert.ok([1, 2, 3, 4].includes(item.tierLevel), `Item ${item.id} invalid tierLevel: ${item.tierLevel}`);
+        assert.ok(item.audio && item.audio.preset, `Item ${item.id} missing audio preset`);
+        assert.ok(item.vfx && item.vfx.videoUrl, `Item ${item.id} missing vfx videoUrl`);
+      }
+    });
+
+    test('confirms getAlertPacksByTier and getAlertPacksByTierLevel query helpers', () => {
+      assert.equal(ALERT_PACKS.length, 42);
+      const freePacks = getAlertPacksByTier('free');
+      assert.ok(freePacks.length >= 4, `Expected >= 4 free packs, got ${freePacks.length}`);
+      const ultraPacks = getAlertPacksByTierLevel(1);
+      assert.ok(ultraPacks.length >= 6, `Expected >= 6 tier 1 packs, got ${ultraPacks.length}`);
     });
   });
 
