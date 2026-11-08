@@ -65,13 +65,21 @@ export function TransparentFramedAvatar({
   rankBadgeText = '#1 TOP',
   showRankPill = true,
 }) {
-  const frameObj = AVATAR_FRAMES_MAP[frameId] || AVATAR_FRAMES_MAP['royal-crown'];
+  const rawFrameId = frameId || 'royal-crown';
+  const normalizedFrameKey = String(rawFrameId).startsWith('frame-') ? rawFrameId : `frame-${rawFrameId}`;
+  const frameObj =
+    AVATAR_FRAMES_MAP[rawFrameId] ||
+    AVATAR_FRAMES_MAP[normalizedFrameKey] ||
+    AVATAR_FRAMES_MAP[String(rawFrameId).replace(/^frame-/, '')] ||
+    AVATAR_FRAMES_MAP['royal-crown'];
+  const pureFrameId = frameObj ? frameObj.id : 'royal-crown';
   const hasPngFrame = Boolean(frameObj && frameObj.imageUrl);
   const avatarSrc = avatarUrl || initialsAvatar(username);
 
   return (
     <div
-      className={`mn-framed-avatar-box ${hasPngFrame ? 'has-rgba-frame' : 'no-rgba-frame'}`}
+      className={`mn-framed-avatar-box frame-${pureFrameId} frame-id-${pureFrameId} ${hasPngFrame ? 'has-rgba-frame' : 'no-rgba-frame'}`}
+      data-frame-id={`frame-${pureFrameId}`}
       style={{
         width: size,
         height: size,
@@ -1188,7 +1196,7 @@ export default function AlertOverlay({
       const preset =
         externalAlert.customData?.soundPreset ||
         externalAlert.pack?.soundPreset ||
-        'shadow_eyes';
+        'shadow-eyes';
       soundEngine.play(preset);
       const dur = externalAlert.pack?.durationMs || 8500;
       timerRef.current = setTimeout(() => {
@@ -1203,7 +1211,7 @@ export default function AlertOverlay({
     busyRef.current = true;
     const nextItem = queueRef.current.shift();
     setActiveAlert(nextItem);
-    soundEngine.play(nextItem.pack?.soundPreset || 'shadow_eyes', nextItem.customSoundUrl);
+    soundEngine.play(nextItem.pack?.soundPreset || 'shadow-eyes', nextItem.customSoundUrl);
 
     const dur = nextItem.pack?.durationMs || 8500;
     timerRef.current = setTimeout(() => {

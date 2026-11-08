@@ -1443,6 +1443,24 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.75);
 }
 
+/* Specific Theme Tweaks for the 4 RGBA Avatar Frames */
+.mn-framed-avatar-box.frame-royal-crown {
+  --frame-accent: #fbbf24;
+  --frame-glow: rgba(251, 191, 36, 0.65);
+}
+.mn-framed-avatar-box.frame-dragon-fire {
+  --frame-accent: #f97316;
+  --frame-glow: rgba(249, 115, 22, 0.7);
+}
+.mn-framed-avatar-box.frame-crimson-demon {
+  --frame-accent: #ef4444;
+  --frame-glow: rgba(239, 68, 68, 0.75);
+}
+.mn-framed-avatar-box.frame-pharaoh-void {
+  --frame-accent: #2dd4bf;
+  --frame-glow: rgba(45, 212, 191, 0.65);
+}
+
 /* Explosive Camera Shake on Detonation */
 .cinematic-camera-shake {
   animation: cinematicExplosionShake 0.85s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.32s both;

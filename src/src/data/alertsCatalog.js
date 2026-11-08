@@ -80,6 +80,7 @@ export const AVATAR_FRAMES = [
 
 export const AVATAR_FRAMES_MAP = AVATAR_FRAMES.reduce((acc, f) => {
   acc[f.id] = f;
+  acc[`frame-${f.id}`] = f;
   return acc;
 }, {});
 
@@ -2863,6 +2864,17 @@ export const ALERTS_CATALOG = ALERT_PACKS.map((p) => {
     CHOREOGRAPHY_MODES[p.choreography || 'shadow-eyes-blast'] ||
     CHOREOGRAPHY_MODES['shadow-eyes-blast'];
 
+  const tierLevelMap = {
+    ultra: 1,
+    loyalty: 1,
+    store: 1,
+    pro: 2,
+    plus: 3,
+    free: 4,
+  };
+  const calculatedTierLevel = tierLevelMap[p.accessType] || 2;
+  const soundFile = p.soundPreset ? `/media/sfx/${p.soundPreset}.mp3` : '/media/sfx/shadow-eyes-explosion.mp3';
+
   return {
     ...p,
     name: p.titleAr,
@@ -2881,6 +2893,21 @@ export const ALERTS_CATALOG = ALERT_PACKS.map((p) => {
     plan: p.accessType,
     accessTier: p.accessType,
     accessType: p.accessType,
+    tierLevel: calculatedTierLevel,
+
+    // Audio SFX & Sound Engine Aliases
+    audio: {
+      preset: p.soundPreset || 'shadow-eyes',
+      fileUrl: soundFile,
+      volume: 0.88,
+    },
+
+    // VFX Video & Texture Engine Aliases
+    vfx: {
+      videoUrl: p.vfxVideo,
+      textureEffect: p.textureEffect,
+      choreography: choreoObj.id,
+    },
 
     // Visual Texture & VFX Engine Aliases
     texture: normalizedTx,
