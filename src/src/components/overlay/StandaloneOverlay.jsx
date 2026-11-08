@@ -6,6 +6,7 @@ import { listenObsBroadcast } from '../../services/obsBundleExporter';
 import { verifyToken } from '../../services/tokenService';
 import { PriorityAlertQueue } from '../../core/queue/PriorityAlertQueue';
 import { normalizeStreamEvent } from '../../core/queue/EventNormalizer';
+import { eventBus } from '../../services/eventBus';
 import './StandaloneOverlay.css';
 
 export default function StandaloneOverlay() {
@@ -139,11 +140,14 @@ export default function StandaloneOverlay() {
         pack: targetPack,
       });
 
+      eventBus.dispatch(streamEvent);
       queue.enqueue(streamEvent);
     });
 
     // Expose window.MNAlerts for OBS Browser Source JavaScript execution
     window.MNAlerts = {
+      eventBus,
+      dispatch: (evt) => eventBus.dispatch(evt),
       trigger: (packIdOrData, customData = {}) => {
         let pack = ALERTS_CATALOG[0];
         let overrides = {};
@@ -172,6 +176,7 @@ export default function StandaloneOverlay() {
           pack,
         });
 
+        eventBus.dispatch(streamEvent);
         queue.enqueue(streamEvent);
       },
       skip: () => {
