@@ -15,6 +15,7 @@ import assert from 'node:assert/strict';
 import {
   createMockStreamEvent,
   getPriorityQueueImplementation,
+  getEventBusImplementation,
 } from './helpers/testHarness.js';
 
 import { soundEngine } from '../services/soundEngine.js';
@@ -107,14 +108,163 @@ describe('Tier 3: Cross-Feature Interactions', () => {
   });
 
   // =========================================================================
-  // 3.4 Multi-Widget Event Bus Synchronization (Milestone 3 Forward Contract)
+  // 3.4 Multi-Widget Event Bus Fanout Synchronization (Milestone 3 Contract)
   // =========================================================================
   describe('3.4 Multi-Widget Event Bus Fanout Synchronization', () => {
     test(
       'single incoming donation simultaneously broadcasts to Alert, Goal, Event List, and Tip Jar',
-      { skip: 'Scheduled for Milestone 3: Stream Widgets Suite (16 Widgets) & Event Bus (Features F16-F32)' },
       async () => {
-        // Forward contract: will test event fanout across live widget instances in M3
+        // 1. Resolve active EventBus implementation
+        const bus = await getEventBusImplementation();
+        assert.ok(bus, 'EventBus instance must be resolved');
+        assert.equal(typeof bus.on, 'function', 'EventBus must have on() method');
+        assert.equal(typeof bus.off, 'function', 'EventBus must have off() method');
+        assert.equal(typeof bus.emit, 'function', 'EventBus must have emit() method');
+        assert.equal(typeof bus.dispatch, 'function', 'EventBus must have dispatch() method');
+
+        // Reset listeners to clean state
+        bus.removeAllListeners();
+
+        // 2. Set up subscriber states representing the 4 active widgets:
+        // A) Alert Overlay / Queue Subscriber
+        let alertOverlayReceived = null;
+        const alertSubscriber = (event) => {
+          alertOverlayReceived = event;
+        };
+
+        // B) Goal & Progress Bar Widget Subscriber
+        const goalWidgetState = {
+          title: 'Donation Goal',
+          target: 500,
+          current: 100,
+          contributions: [],
+          onDonation(event) {
+            const amount = event.payload?.amount || 0;
+            this.current += amount;
+            this.contributions.push({ sender: event.sender?.name, amount });
+          },
+        };
+
+        // C) Event List Widget Subscriber
+        const eventListState = {
+          maxItems: 10,
+          events: [],
+          onStreamEvent(event) {
+            this.events.unshift(event);
+          },
+        };
+
+        // D) Tip Jar Physics Widget Subscriber
+        const tipJarState = {
+          coins: [],
+          onDonation(event) {
+            this.coins.push({
+              id: event.id,
+              amount: event.payload?.amount || 0,
+              currency: event.payload?.currency || 'USD',
+              sender: event.sender?.name,
+              tier: event.tier,
+            });
+          },
+        };
+
+        // 3. Wire all 4 widgets to the shared Event Bus
+        const unsubAlert = bus.on('stream_event', alertSubscriber);
+        const unsubGoal = bus.on('donation', (e) => goalWidgetState.onDonation(e));
+        const unsubList = bus.on('stream_event', (e) => eventListState.onStreamEvent(e));
+        const unsubJar = bus.on('donation', (e) => tipJarState.onDonation(e));
+
+        assert.equal(bus.listenerCount('stream_event'), 2, '2 widgets subscribed to stream_event');
+        assert.equal(bus.listenerCount('donation'), 2, '2 widgets subscribed to donation');
+
+        // 4. Create single incoming donation StreamEvent
+        const donationEvent = createMockStreamEvent({
+          id: 'evt_fanout_donation_100',
+          type: 'donation',
+          priority: 2,
+          tier: 'ultra',
+          sender: {
+            name: 'Sultan_Of_Stream',
+            avatarUrl: 'https://example.com/sultan.png',
+            frameId: 'frame-royal-crown',
+          },
+          payload: {
+            amount: 150,
+            currency: 'USD',
+            message: 'Incredible broadcast! Keep building the best platform! 👑',
+          },
+        });
+
+        // 5. Ingest and broadcast single donation through Event Bus
+        const dispatched = bus.dispatch(donationEvent);
+        assert.equal(dispatched.id, 'evt_fanout_donation_100', 'Dispatched event should match payload');
+
+        // 6. Verify simultaneous multi-widget broadcast assertions:
+        // A) Alert Overlay verification
+        assert.ok(alertOverlayReceived, 'AlertOverlay must have received the donation event');
+        assert.equal(alertOverlayReceived.id, 'evt_fanout_donation_100');
+        assert.equal(alertOverlayReceived.sender.name, 'Sultan_Of_Stream');
+        assert.equal(alertOverlayReceived.payload.amount, 150);
+
+        // B) Goal Widget verification
+        assert.equal(goalWidgetState.current, 250, 'GoalWidget must increment current amount from 100 to 250');
+        assert.equal(goalWidgetState.contributions.length, 1);
+        assert.equal(goalWidgetState.contributions[0].sender, 'Sultan_Of_Stream');
+        assert.equal(goalWidgetState.contributions[0].amount, 150);
+
+        // C) Event List Widget verification
+        assert.equal(eventListState.events.length, 1, 'EventList must have recorded 1 event');
+        assert.equal(eventListState.events[0].id, 'evt_fanout_donation_100');
+        assert.equal(eventListState.events[0].type, 'donation');
+
+        // D) Tip Jar Widget verification
+        assert.equal(tipJarState.coins.length, 1, 'TipJar must have spawned 1 physics coin');
+        assert.equal(tipJarState.coins[0].id, 'evt_fanout_donation_100');
+        assert.equal(tipJarState.coins[0].amount, 150);
+        assert.equal(tipJarState.coins[0].currency, 'USD');
+        assert.equal(tipJarState.coins[0].tier, 'ultra');
+
+        // 7. Verify Unsubscribe & Memory Safety
+        unsubAlert();
+        unsubGoal();
+        assert.equal(bus.listenerCount('stream_event'), 1, 'stream_event should now have 1 subscriber');
+        assert.equal(bus.listenerCount('donation'), 1, 'donation should now have 1 subscriber');
+
+        const followEvent = createMockStreamEvent({
+          id: 'evt_fanout_follow_200',
+          type: 'follow',
+          priority: 4,
+          sender: { name: 'FollowerFan' },
+        });
+
+        bus.dispatch(followEvent);
+
+        // AlertOverlay was unsubscribed, so alertOverlayReceived stays as the donation
+        assert.equal(alertOverlayReceived.id, 'evt_fanout_donation_100', 'Unsubscribed AlertOverlay should not receive followEvent');
+        // GoalWidget was unsubscribed and follow is not donation, so goalWidgetState.current stays 250
+        assert.equal(goalWidgetState.current, 250);
+        // EventList is still subscribed to stream_event, so it should have 2 events
+        assert.equal(eventListState.events.length, 2);
+        assert.equal(eventListState.events[0].id, 'evt_fanout_follow_200');
+
+        // 8. Verify Error Isolation: broken subscriber does not crash the bus or block peers
+        let peerReceived = false;
+        bus.on('stream_event', () => {
+          throw new Error('Crashing buggy widget listener');
+        });
+        bus.on('stream_event', () => {
+          peerReceived = true;
+        });
+
+        assert.doesNotThrow(() => {
+          bus.dispatch(createMockStreamEvent({ id: 'evt_resilience_test' }));
+        }, 'EventBus must not crash when a subscriber throws');
+        assert.ok(peerReceived, 'Peer subscriber must still execute when a faulty subscriber throws');
+
+        // Cleanup
+        unsubList();
+        unsubJar();
+        bus.removeAllListeners();
       }
     );
   });

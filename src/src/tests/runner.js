@@ -24,6 +24,8 @@ const TIERS = [
   { id: 2, name: 'Tier 2: Boundary, Adversarial & Extreme Inputs', file: 'tier2_boundary_corner_cases.test.js' },
   { id: 3, name: 'Tier 3: Cross-Feature Interactions', file: 'tier3_cross_feature_interactions.test.js' },
   { id: 4, name: 'Tier 4: Real-World Broadcast Scenarios', file: 'tier4_real_world_scenarios.test.js' },
+  { id: 5, name: 'Tier 5: Milestone 3 Stream Widgets Suite & Infrastructure', file: 'widgets/widgets_m3_suite.test.js' },
+  { id: 6, name: 'Tier 6: Webhook Adapters & Cryptographic Security', file: 'unit/webhookAdapters.test.js' },
 ];
 
 console.log('\n======================================================================');
@@ -41,7 +43,7 @@ const tiersToRun = targetTier !== null
   : TIERS;
 
 if (tiersToRun.length === 0) {
-  console.error(`❌ Unknown tier specified: ${targetTier}. Available tiers: 0, 1, 2, 3, 4.`);
+  console.error(`❌ Unknown tier specified: ${targetTier}. Available tiers: 0, 1, 2, 3, 4, 5, 6.`);
   process.exit(1);
 }
 

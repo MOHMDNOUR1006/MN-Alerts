@@ -1,0 +1,688 @@
+/**
+ * Widgets.css - Scoped BEM Styles for All 16 Stream Widgets
+ * Grounded in: PROJECT.md § Architecture, Features F16-F31 & OBS CEF Transparency
+ */
+
+/* =========================================================================
+   Base Widget Container & OBS Transparency
+   ========================================================================= */
+.mn-widget-container {
+  box-sizing: border-box;
+  font-family: 'Tajawal', 'Cairo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.mn-widget-overlay-mode {
+  background: transparent !important;
+  user-select: none;
+  pointer-events: auto;
+}
+
+.mn-widget-studio-mode {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+/* =========================================================================
+   1. Chat Box Widget (.mn-widget-chat-box)
+   ========================================================================= */
+.mn-chatbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.mn-chatbox-messages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: hidden;
+  width: 100%;
+  margin-top: auto;
+}
+
+.mn-chatbox-messages.direction-top-to-bottom {
+  margin-top: 0;
+  margin-bottom: auto;
+}
+
+.mn-chatbox-item {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: rgba(15, 12, 20, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #fff;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  animation: mnFadeInSlide 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  word-break: break-word;
+}
+
+.mn-chatbox-item.fading {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+.mn-chatbox-badges {
+  display: inline-flex;
+  gap: 3px;
+  margin-right: 4px;
+}
+
+.mn-chatbox-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.mn-chatbox-badge-broadcaster { background: #ef4444; color: #fff; }
+.mn-chatbox-badge-moderator { background: #10b981; color: #fff; }
+.mn-chatbox-badge-vip { background: #8b5cf6; color: #fff; }
+.mn-chatbox-badge-subscriber { background: #f59e0b; color: #111; }
+
+.mn-chatbox-sender {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.mn-chatbox-text {
+  font-weight: 400;
+  color: #f3f4f6;
+}
+
+/* =========================================================================
+   2. Event List Widget (.mn-widget-event-list)
+   ========================================================================= */
+.mn-eventlist {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.mn-eventlist.vertical {
+  flex-direction: column;
+}
+
+.mn-eventlist.horizontal {
+  flex-direction: row;
+}
+
+.mn-eventlist-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  background: rgba(18, 14, 26, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  animation: mnSlideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
+}
+
+.mn-eventlist-tier-free { border-left: 4px solid #2dd4bf; }
+.mn-eventlist-tier-plus { border-left: 4px solid #b9834a; }
+.mn-eventlist-tier-pro { border-left: 4px solid #10b981; }
+.mn-eventlist-tier-ultra { border-left: 4px solid #f59e0b; box-shadow: 0 0 16px rgba(245, 158, 11, 0.3); }
+
+.mn-eventlist-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #374151;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  overflow: hidden;
+}
+
+.mn-eventlist-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mn-eventlist-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.mn-eventlist-name {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mn-eventlist-meta {
+  font-size: 12px;
+  color: #9ca3af;
+}
+
+/* =========================================================================
+   3. Goals & Progress Bars Widget (.mn-widget-goals-progress)
+   ========================================================================= */
+.mn-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(15, 12, 22, 0.85);
+  backdrop-filter: blur(14px);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.mn-goals-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mn-goals-title {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.mn-goals-values {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2dd4bf;
+  font-variant-numeric: tabular-nums;
+}
+
+.mn-goals-bar-bg {
+  width: 100%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mn-goals-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2dd4bf 0%, #10b981 50%, #f59e0b 100%);
+  border-radius: 8px;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 0 12px rgba(45, 212, 191, 0.5);
+  position: relative;
+}
+
+.mn-goals-celebration {
+  animation: mnGoalPulse 1.2s infinite alternate;
+}
+
+/* =========================================================================
+   4. Tip Jar Widget (.mn-widget-tip-jar)
+   ========================================================================= */
+.mn-tipjar {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mn-tipjar-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.mn-tipjar-badge {
+  position: absolute;
+  top: 10px;
+  background: rgba(15, 12, 22, 0.8);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  padding: 4px 10px;
+  border-radius: 20px;
+  color: #f59e0b;
+  font-size: 12px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+}
+
+/* =========================================================================
+   5. Top Supporters Widget (.mn-widget-top-supporters)
+   ========================================================================= */
+.mn-topsupporters {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 12px;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.mn-topsupporters-podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.mn-topsupporters-avatar-wrapper {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 8px;
+}
+
+.mn-topsupporters-avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #262626;
+}
+
+.mn-topsupporters-frame {
+  position: absolute;
+  top: -15%;
+  left: -15%;
+  width: 130%;
+  height: 130%;
+  pointer-events: none;
+}
+
+.mn-topsupporters-pillar {
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(24, 20, 32, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px 10px 0 0;
+  padding: 10px 4px;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.mn-topsupporters-slot-1 .mn-topsupporters-pillar { height: 110px; border-color: #f59e0b; box-shadow: 0 0 20px rgba(245, 158, 11, 0.25); }
+.mn-topsupporters-slot-2 .mn-topsupporters-pillar { height: 85px; border-color: #94a3b8; }
+.mn-topsupporters-slot-3 .mn-topsupporters-pillar { height: 65px; border-color: #b45309; }
+
+/* =========================================================================
+   6. End Credits Widget (.mn-widget-end-credits)
+   ========================================================================= */
+.mn-endcredits {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  text-align: center;
+}
+
+.mn-endcredits-scroll {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.mn-endcredits-section-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #f59e0b;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.mn-endcredits-item {
+  font-size: 16px;
+  font-weight: 600;
+  color: #f3f4f6;
+  margin: 4px 0;
+}
+
+/* =========================================================================
+   7. Media Share Widget (.mn-widget-media-share)
+   ========================================================================= */
+.mn-mediashare {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #2dd4bf;
+  box-shadow: 0 0 24px rgba(45, 212, 191, 0.3);
+}
+
+.mn-mediashare-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.mn-mediashare-banner {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 12px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+  font-size: 13px;
+}
+
+/* =========================================================================
+   8. Polls Widget (.mn-widget-polls)
+   ========================================================================= */
+.mn-polls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: rgba(16, 12, 24, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.mn-polls-question {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.mn-polls-option {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mn-polls-bar-track {
+  height: 14px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 7px;
+  overflow: hidden;
+}
+
+.mn-polls-bar-fill {
+  height: 100%;
+  border-radius: 7px;
+  transition: width 0.5s ease;
+}
+
+/* =========================================================================
+   9. Spin Wheel Widget (.mn-widget-spin-wheel)
+   ========================================================================= */
+.mn-spinwheel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mn-spinwheel-canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.mn-spinwheel-pointer {
+  position: absolute;
+  top: 4px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 24px solid #ef4444;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+  z-index: 10;
+  transform-origin: 50% 0;
+  transition: transform 0.08s ease-out;
+}
+
+/* =========================================================================
+   10. Stream Boss Widget (.mn-widget-stream-boss)
+   ========================================================================= */
+.mn-streamboss {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 18px;
+  background: rgba(18, 10, 24, 0.9);
+  border: 2px solid #ef4444;
+  border-radius: 14px;
+  color: #fff;
+  box-shadow: 0 0 24px rgba(239, 68, 68, 0.35);
+  box-sizing: border-box;
+}
+
+.mn-streamboss-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  border: 2px solid #ef4444;
+  object-fit: cover;
+  background: #111;
+}
+
+.mn-streamboss-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mn-streamboss-bars {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mn-streamboss-delayed-bar {
+  position: absolute;
+  height: 100%;
+  background: #f59e0b;
+  border-radius: 8px;
+  transition: width 0.7s ease;
+}
+
+.mn-streamboss-hp-bar {
+  position: absolute;
+  height: 100%;
+  background: #ef4444;
+  border-radius: 8px;
+  transition: width 0.2s ease;
+}
+
+/* =========================================================================
+   11. Emote Wall Widget (.mn-widget-emote-wall)
+   ========================================================================= */
+.mn-emotewall {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.mn-emotewall-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* =========================================================================
+   12. Sponsor Banner Widget (.mn-widget-sponsor-banner)
+   ========================================================================= */
+.mn-sponsorbanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: rgba(16, 14, 26, 0.9);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 14px;
+  color: #fff;
+  box-sizing: border-box;
+  perspective: 1000px;
+}
+
+.mn-sponsorbanner-qr {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  background: #fff;
+  padding: 3px;
+}
+
+/* =========================================================================
+   13. Countdown Timer Widget (.mn-widget-countdown-timer)
+   ========================================================================= */
+.mn-countdowntimer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 22px;
+  background: rgba(15, 12, 22, 0.9);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fff;
+  box-sizing: border-box;
+}
+
+.mn-countdowntimer-digits {
+  font-family: 'Exo 2', monospace;
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+  color: #2dd4bf;
+}
+
+.mn-countdowntimer-urgent .mn-countdowntimer-digits {
+  color: #ef4444;
+  animation: mnUrgentPulse 0.8s infinite alternate;
+}
+
+/* =========================================================================
+   14. Stream Labels Widget (.mn-widget-stream-labels)
+   ========================================================================= */
+.mn-streamlabels {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  background: rgba(18, 14, 26, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid rgba(45, 212, 191, 0.3);
+  color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.mn-streamlabels-icon {
+  color: #2dd4bf;
+  display: flex;
+}
+
+/* =========================================================================
+   15. Viewer Counter Widget (.mn-widget-viewer-counter)
+   ========================================================================= */
+.mn-viewercounter {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background: rgba(16, 12, 24, 0.85);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.mn-viewercounter-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 10px #10b981;
+  animation: mnBeaconPulse 1.5s infinite;
+}
+
+/* =========================================================================
+   16. Custom HTML/CSS Widget (.mn-widget-custom-html)
+   ========================================================================= */
+.mn-customwidget {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent !important;
+}
+
+.mn-customwidget iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent !important;
+}
+
+/* =========================================================================
+   Keyframe Animations
+   ========================================================================= */
+@keyframes mnFadeInSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mnSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes mnGoalPulse {
+  from { filter: drop-shadow(0 0 6px rgba(45, 212, 191, 0.4)); }
+  to { filter: drop-shadow(0 0 16px rgba(245, 158, 11, 0.8)); }
+}
+
+@keyframes mnUrgentPulse {
+  from { text-shadow: 0 0 4px rgba(239, 68, 68, 0.4); }
+  to { text-shadow: 0 0 18px rgba(239, 68, 68, 0.9); }
+}
+
+@keyframes mnBeaconPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.6; }
+}

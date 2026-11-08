@@ -306,3 +306,88 @@ export async function getTokenServiceImplementation() {
   }
   return HmacTokenService;
 }
+
+/**
+ * Reference Event Bus implementing the authoritative EventBus interface.
+ */
+export class ReferenceEventBus {
+  constructor(options = {}) {
+    this._events = new Map();
+    this._maxListeners = options.maxListeners || 50;
+    this._history = [];
+    this._maxHistory = options.maxHistory || 50;
+  }
+
+  on(event, handler) {
+    if (typeof event !== 'string' || typeof handler !== 'function') return () => {};
+    if (!this._events.has(event)) this._events.set(event, new Set());
+    this._events.get(event).add(handler);
+    return () => this.off(event, handler);
+  }
+
+  off(event, handler) {
+    if (!this._events.has(event)) return this;
+    const set = this._events.get(event);
+    set.delete(handler);
+    if (set.size === 0) this._events.delete(event);
+    return this;
+  }
+
+  emit(event, ...args) {
+    if (!this._events.has(event)) return false;
+    const listeners = Array.from(this._events.get(event));
+    for (const fn of listeners) {
+      try {
+        fn(...args);
+      } catch (err) {
+        console.error(`[ReferenceEventBus] Listener error on "${event}":`, err);
+      }
+    }
+    return true;
+  }
+
+  dispatch(event) {
+    this._history.unshift(event);
+    if (this._history.length > this._maxHistory) this._history.pop();
+    this.emit('stream_event', event);
+    if (event.type) this.emit(event.type, event);
+    if (event.type === 'donation' || event.payload?.amount > 0) this.emit('donation_processed', event);
+    return event;
+  }
+
+  once(event, handler) {
+    const wrapper = (...args) => {
+      this.off(event, wrapper);
+      handler(...args);
+    };
+    return this.on(event, wrapper);
+  }
+
+  removeAllListeners(event) {
+    if (event) this._events.delete(event);
+    else this._events.clear();
+    return this;
+  }
+
+  listenerCount(event) {
+    return this._events.has(event) ? this._events.get(event).size : 0;
+  }
+}
+
+/**
+ * Resolves the active EventBus implementation:
+ * Uses real implementation if present at `../../services/eventBus.js`,
+ * otherwise falls back to ReferenceEventBus oracle.
+ */
+export async function getEventBusImplementation(options = {}) {
+  try {
+    const mod = await import('../../services/eventBus.js');
+    const BusClass = mod.EventBus || mod.default?.EventBus;
+    if (BusClass) return new BusClass(options);
+    if (mod.eventBus) return mod.eventBus;
+  } catch (_) {
+    // Falls back to reference oracle
+  }
+  return new ReferenceEventBus(options);
+}
+
